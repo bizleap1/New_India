@@ -1,0 +1,298 @@
+"use client";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopProductsOpen, setDesktopProductsOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Lock body scroll + toggle optional page shift class on <html>
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.classList.add("drawer-open");
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.classList.remove("drawer-open");
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.classList.remove("drawer-open");
+    };
+  }, [mobileOpen]);
+
+  // Close on resize/esc
+  useEffect(() => {
+    const onResize = () => window.innerWidth >= 768 && setMobileOpen(false);
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        setMobileProductsOpen(false);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  // Close menus on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setMobileProductsOpen(false);
+    setDesktopProductsOpen(false);
+  }, [pathname]);
+
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Brochures", path: "/brochures" },
+    {
+      name: "Products",
+      sub: [
+        { name: "Spices", path: "/spices" },
+        { name: "Cereals & Pulses", path: "/cerealsandpulses" },
+        { name: "Organic Food", path: "/organicfood" },
+        { name: "Fruits & Vegetables", path: "/fruitsandvegetables" },
+        { name: "Others", path: "/others" },
+      ],
+    },
+    { name: "Gallery", path: "/gallery" },
+    { name: "Contact Us", path: "/contact" },
+    { name: "About Us", path: "/about" },
+  ];
+
+  const isActive = (path) => {
+    if (path === "/") return pathname === "/";
+    return pathname.startsWith(path);
+  };
+
+  return (
+    <nav
+      role="navigation"
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+        scrolled
+          ? "bg-zinc-950/80 backdrop-blur-xl border-b border-white/10"
+          : "bg-gradient-to-b from-zinc-950/80 to-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-md"
+            aria-label="New India Export Home"
+          >
+            <span className="text-xl md:text-2xl font-semibold tracking-tight text-white">
+              New India <span className="text-white/60">Export</span>
+            </span>
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-7">
+            {navItems.map((item) =>
+              item.sub ? (
+                <div
+                  key={item.name}
+                  className="relative group"
+                  onMouseEnter={() => setDesktopProductsOpen(true)}
+                  onMouseLeave={() => setDesktopProductsOpen(false)}
+                >
+                  <button
+                    aria-haspopup="menu"
+                    aria-expanded={desktopProductsOpen}
+                    className={`flex items-center gap-1 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-md px-1 ${
+                      scrolled ? "text-zinc-300 hover:text-white" : "text-zinc-200 hover:text-white"
+                    }`}
+                  >
+                    <span>Products</span>
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-300 ${
+                        desktopProductsOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {desktopProductsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 12, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        className="absolute left-0 top-full z-50 mt-1 min-w-[240px] rounded-xl border border-white/10 bg-zinc-950/95 p-1.5 shadow-2xl backdrop-blur-xl"
+                      >
+                        {item.sub.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            href={sub.path}
+                            className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white transition-colors ${
+                              isActive(sub.path) ? "bg-white/5 text-white" : ""
+                            }`}
+                          >
+                            <span>{sub.name}</span>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.path}
+                  className={`relative group text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-md px-1 ${
+                    scrolled ? "text-zinc-300 hover:text-white" : "text-zinc-200 hover:text-white"
+                  }`}
+                >
+                  <span className={`${isActive(item.path) ? "text-white" : ""}`}>
+                    {item.name}
+                  </span>
+                  <span
+                    className={`pointer-events-none absolute left-0 -bottom-1 h-[2px] w-0 bg-white/80 transition-all group-hover:w-full ${
+                      isActive(item.path) ? "w-full" : ""
+                    }`}
+                  />
+                </Link>
+              )
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileOpen((s) => !s)}
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full text-zinc-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+          >
+            <div className="relative h-5 w-6">
+              <motion.span
+                className="absolute left-0 top-0 h-[2px] w-6 rounded bg-current"
+                animate={mobileOpen ? { rotate: 45, y: 10 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="absolute left-0 top-1/2 h-[2px] w-6 -translate-y-1/2 rounded bg-current"
+                animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="absolute left-0 bottom-0 h-[2px] w-6 rounded bg-current"
+                animate={mobileOpen ? { rotate: -45, y: -10 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.2 }}
+              />
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer + Overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMobileOpen(false)}
+              className="fixed inset-0 z-[60] bg-black/55 backdrop-blur-[2px] md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+            {/* Drawer */}
+            <motion.aside
+              className="fixed inset-y-0 left-0 z-[70] w-[86%] max-w-sm md:hidden border-r border-white/10 bg-zinc-950/95 backdrop-blur-xl shadow-2xl"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", stiffness: 420, damping: 40, mass: 0.8 }}
+            >
+              <div className="flex h-16 items-center justify-between px-4">
+                <span className="text-lg font-semibold text-white">Menu</span>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-md p-2 text-zinc-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                >
+                  ✕
+                </button>
+              </div>
+              <nav className="px-2 pb-8">
+                {navItems.map((item) =>
+                  item.sub ? (
+                    <div key={item.name} className="px-2">
+                      <button
+                        onClick={() => setMobileProductsOpen((v) => !v)}
+                        aria-expanded={mobileProductsOpen}
+                        className="flex w-full items-center justify-between rounded-lg px-3.5 py-3 text-base font-medium text-zinc-200 hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+                      >
+                        <span>Products</span>
+                        <ChevronDown
+                          size={18}
+                          className={`transition-transform duration-300 ${mobileProductsOpen ? "rotate-180" : ""}`}
+                        />
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {mobileProductsOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.24, ease: "easeOut" }}
+                            className="overflow-hidden"
+                          >
+                            <div className="mt-1 space-y-1 rounded-lg pl-2">
+                              {item.sub.map((sub) => (
+                                <Link
+                                  key={sub.name}
+                                  href={sub.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className={`block rounded-md px-3.5 py-2 text-sm text-zinc-300 hover:bg:white/5 hover:text-white ${
+                                    isActive(sub.path) ? "bg-white/5 text-white" : ""
+                                  }`.replace("hover:bg:white/5","hover:bg-white/5")}
+                                >
+                                  {sub.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      key={item.name}
+                      href={item.path}
+                      onClick={() => setMobileOpen(false)}
+                      className={`mx-2 mt-1 block rounded-lg px-3.5 py-3 text-base font-medium text-zinc-200 hover:bg-white/5 hover:text-white ${
+                        isActive(item.path) ? "bg-white/5 text-white" : ""
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                )}
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}
