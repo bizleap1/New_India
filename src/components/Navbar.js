@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopProductsOpen, setDesktopProductsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [desktopBrochuresOpen, setDesktopBrochuresOpen] = useState(false);
+  const [mobileBrochuresOpen, setMobileBrochuresOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export default function Navbar() {
       if (e.key === "Escape") {
         setMobileOpen(false);
         setMobileProductsOpen(false);
+        setMobileBrochuresOpen(false);
       }
     };
     window.addEventListener("resize", onResize);
@@ -47,12 +50,40 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
     setMobileProductsOpen(false);
+    setMobileBrochuresOpen(false);
     setDesktopProductsOpen(false);
+    setDesktopBrochuresOpen(false);
   }, [pathname]);
+
+  const brochures = [
+    { 
+      name: "English Brochure", 
+      path: "https://drive.google.com/file/d/your-english-brochure-id/view?usp=sharing",
+      type: "download"
+    },
+    { 
+      name: "Hindi Brochure", 
+      path: "https://drive.google.com/file/d/your-hindi-brochure-id/view?usp=sharing",
+      type: "download"
+    },
+    { 
+      name: "Arabic Brochure", 
+      path: "https://drive.google.com/file/d/your-arabic-brochure-id/view?usp=sharing",
+      type: "download"
+    },
+    { 
+      name: "View All Brochures", 
+      path: "https://drive.google.com/file/d/your-arabic-brochure-id/view?usp=sharing",
+      type: "download"
+    }
+  ];
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Brochures", path: "/brochures" },
+    { 
+      name: "Brochures", 
+      sub: brochures
+    },
     {
       name: "Products",
       sub: [
@@ -69,6 +100,49 @@ export default function Navbar() {
   ];
 
   const isActive = (path) => (path === "/" ? pathname === "/" : pathname.startsWith(path));
+
+  const handleBrochureClick = (item) => {
+    if (item.type === "download") {
+      window.open(item.path, "_blank", "noopener,noreferrer");
+    }
+    setMobileOpen(false);
+    setDesktopBrochuresOpen(false);
+  };
+
+  const BrochureItem = ({ item, isMobile = false }) => {
+    if (item.type === "download") {
+      return (
+        <button
+          onClick={() => handleBrochureClick(item)}
+          className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
+            isMobile 
+              ? "text-zinc-300 hover:bg-white/5 hover:text-white" 
+              : "text-zinc-300 hover:bg-white/5 hover:text-white"
+          }`}
+        >
+          <span>{item.name}</span>
+          <Download size={14} className="text-zinc-400" />
+        </button>
+      );
+    }
+    
+    return (
+      <Link
+        href={item.path}
+        onClick={() => {
+          setMobileOpen(false);
+          setDesktopBrochuresOpen(false);
+        }}
+        className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
+          isMobile 
+            ? "text-zinc-300 hover:bg-white/5 hover:text-white" 
+            : "text-zinc-300 hover:bg-white/5 hover:text-white"
+        } ${isActive(item.path) ? "bg-white/5 text-white" : ""}`}
+      >
+        <span>{item.name}</span>
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -101,25 +175,35 @@ export default function Navbar() {
                   <div
                     key={item.name}
                     className="relative group"
-                    onMouseEnter={() => setDesktopProductsOpen(true)}
-                    onMouseLeave={() => setDesktopProductsOpen(false)}
+                    onMouseEnter={() => {
+                      if (item.name === "Products") setDesktopProductsOpen(true);
+                      if (item.name === "Brochures") setDesktopBrochuresOpen(true);
+                    }}
+                    onMouseLeave={() => {
+                      if (item.name === "Products") setDesktopProductsOpen(false);
+                      if (item.name === "Brochures") setDesktopBrochuresOpen(false);
+                    }}
                   >
                     <button
                       aria-haspopup="menu"
-                      aria-expanded={desktopProductsOpen}
+                      aria-expanded={item.name === "Products" ? desktopProductsOpen : desktopBrochuresOpen}
                       className={`flex items-center gap-1 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-md px-1 ${
                         scrolled ? "text-zinc-300 hover:text-white" : "text-zinc-200 hover:text-white"
                       }`}
                     >
-                      <span>Products</span>
+                      <span>{item.name}</span>
                       <ChevronDown
                         size={16}
-                        className={`transition-transform duration-300 ${desktopProductsOpen ? "rotate-180" : ""}`}
+                        className={`transition-transform duration-300 ${
+                          (item.name === "Products" && desktopProductsOpen) || 
+                          (item.name === "Brochures" && desktopBrochuresOpen) ? "rotate-180" : ""
+                        }`}
                       />
                     </button>
 
                     <AnimatePresence>
-                      {desktopProductsOpen && (
+                      {(item.name === "Products" && desktopProductsOpen) || 
+                       (item.name === "Brochures" && desktopBrochuresOpen) ? (
                         <motion.div
                           initial={{ opacity: 0, y: 8, scale: 0.98 }}
                           animate={{ opacity: 1, y: 12, scale: 1 }}
@@ -128,18 +212,22 @@ export default function Navbar() {
                           className="absolute left-0 top-full z-50 mt-1 min-w-[240px] rounded-xl border border-white/10 bg-zinc-950/95 p-1.5 shadow-2xl"
                         >
                           {item.sub.map((sub) => (
-                            <Link
-                              key={sub.name}
-                              href={sub.path}
-                              className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white transition-colors ${
-                                isActive(sub.path) ? "bg-white/5 text-white" : ""
-                              }`}
-                            >
-                              <span>{sub.name}</span>
-                            </Link>
+                            item.name === "Brochures" ? (
+                              <BrochureItem key={sub.name} item={sub} />
+                            ) : (
+                              <Link
+                                key={sub.name}
+                                href={sub.path}
+                                className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white transition-colors ${
+                                  isActive(sub.path) ? "bg-white/5 text-white" : ""
+                                }`}
+                              >
+                                <span>{sub.name}</span>
+                              </Link>
+                            )
                           ))}
                         </motion.div>
-                      )}
+                      ) : null}
                     </AnimatePresence>
                   </div>
                 ) : (
@@ -151,6 +239,15 @@ export default function Navbar() {
                     }`}
                   >
                     <span className={`${isActive(item.path) ? "text-white" : ""}`}>{item.name}</span>
+                    {isActive(item.path) && (
+                      <motion.span
+                        className="absolute -bottom-1 left-0 h-0.5 bg-white"
+                        layoutId="activeIndicator"
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
                   </Link>
                 )
               )}
@@ -223,21 +320,29 @@ export default function Navbar() {
                   item.sub ? (
                     <div key={item.name} className="px-2">
                       <button
-                        onClick={() => setMobileProductsOpen((v) => !v)}
-                        aria-expanded={mobileProductsOpen}
+                        onClick={() => {
+                          if (item.name === "Products") setMobileProductsOpen((v) => !v);
+                          if (item.name === "Brochures") setMobileBrochuresOpen((v) => !v);
+                        }}
+                        aria-expanded={
+                          (item.name === "Products" && mobileProductsOpen) || 
+                          (item.name === "Brochures" && mobileBrochuresOpen)
+                        }
                         className="flex w-full items-center justify-between rounded-lg px-3.5 py-3 text-base font-medium text-zinc-200 hover:bg-white/5 hover:text-white"
                       >
-                        <span>Products</span>
+                        <span>{item.name}</span>
                         <ChevronDown
                           size={18}
                           className={`transition-transform duration-300 ${
-                            mobileProductsOpen ? "rotate-180" : ""
+                            ((item.name === "Products" && mobileProductsOpen) || 
+                            (item.name === "Brochures" && mobileBrochuresOpen)) ? "rotate-180" : ""
                           }`}
                         />
                       </button>
 
                       <AnimatePresence initial={false}>
-                        {mobileProductsOpen && (
+                        {(item.name === "Products" && mobileProductsOpen) || 
+                         (item.name === "Brochures" && mobileBrochuresOpen) ? (
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
@@ -247,20 +352,24 @@ export default function Navbar() {
                           >
                             <div className="mt-1 space-y-1 rounded-lg pl-2">
                               {item.sub.map((sub) => (
-                                <Link
-                                  key={sub.name}
-                                  href={sub.path}
-                                  onClick={() => setMobileOpen(false)}
-                                  className={`block rounded-md px-3.5 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white ${
-                                    isActive(sub.path) ? "bg-white/5 text-white" : ""
-                                  }`}
-                                >
-                                  {sub.name}
-                                </Link>
+                                item.name === "Brochures" ? (
+                                  <BrochureItem key={sub.name} item={sub} isMobile={true} />
+                                ) : (
+                                  <Link
+                                    key={sub.name}
+                                    href={sub.path}
+                                    onClick={() => setMobileOpen(false)}
+                                    className={`block rounded-md px-3.5 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white ${
+                                      isActive(sub.path) ? "bg-white/5 text-white" : ""
+                                    }`}
+                                  >
+                                    {sub.name}
+                                  </Link>
+                                )
                               ))}
                             </div>
                           </motion.div>
-                        )}
+                        ) : null}
                       </AnimatePresence>
                     </div>
                   ) : (

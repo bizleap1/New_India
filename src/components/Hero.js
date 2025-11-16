@@ -1,26 +1,16 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Head from "next/head";
+import BookingModal from "./BookingModal";
 
 export default function Hero() {
-  const fontFamily =
-    "'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* Load Font */}
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
-      <section className="relative h-[55vh] sm:h-[70vh] md:h-[100vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+      {/* HERO SECTION */}
+      <section className="relative h-[70vh] sm:h-[85vh] md:h-[100vh] flex items-center justify-center overflow-hidden">
         <Image
           src="/Hero.jpg"
           alt="New India Export"
@@ -29,53 +19,38 @@ export default function Hero() {
           className="object-cover"
         />
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
-        {/* Content with blur backdrop */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1.2 }}
           className="relative z-10 text-center px-6"
         >
-          <div
-            className="mx-auto max-w-2xl rounded-2xl p-6 md:p-8"
-            style={{
-              background: "rgba(0, 0, 0, 0.35)",
-              backdropFilter: "blur(3px)",
-              WebkitBackdropFilter: "blur(3px)",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-            }}
-          >
-            <h1
-              className="text-white text-4xl sm:text-5xl md:text-7xl font-bold leading-tight drop-shadow-lg"
-              style={{
-                fontFamily,
-                letterSpacing: "-0.02em",
-              }}
-            >
+          <div className="mx-auto max-w-2xl p-8 rounded-2xl bg-white/10 backdrop-blur-md shadow-2xl border border-white/20">
+            <h1 className="text-white text-5xl md:text-7xl font-bold drop-shadow-lg">
               New India Export
             </h1>
 
-            <p
-              className="text-gray-200 text-base sm:text-lg md:text-xl mt-4 max-w-xl mx-auto leading-relaxed"
-              style={{ fontFamily, opacity: 0.9 }}
-            >
-              Exporting India’s rich agricultural heritage to the world — delivering quality, trust, and excellence.
+            <p className="text-gray-200 text-lg md:text-xl mt-4">
+              Exporting India’s agricultural excellence to the world.
             </p>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="mt-8 px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300"
-              style={{ fontFamily }}
+              onClick={() => setOpen(true)}
+              type="button"
+              className="mt-8 px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full shadow-lg"
             >
-              Explore Products
+              Book Your Shipment
             </motion.button>
           </div>
         </motion.div>
       </section>
+
+      {/* BOOKING MODAL */}
+      <BookingModal open={open} setOpen={setOpen} />
     </>
   );
 }
