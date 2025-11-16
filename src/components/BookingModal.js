@@ -41,11 +41,11 @@ export default function BookingModal({ open, setOpen }) {
   ];
 
   const SubProductsMap = {
-    Spices: ["Turmeric", "Red Chilli", "Cumin", "Coriander", "Cardamom"],
-    "Cereals & Pulses": ["Basmati Rice", "Wheat", "Toor Dal", "Chana Dal"],
-    "Organic Food": ["Organic Honey", "Organic Wheat", "Organic Spices"],
-    "Fruits & Vegetables": ["Banana", "Onion", "Potato", "Mango"],
-    Others: ["Cotton", "Oils", "Leather Goods", "Custom Items"],
+    Spices: ["Turmeric", "Red Chilli Powder", "Cumin", "Coriander", "Cardamom", "Black Pepper", "Clove","Cinnamon"],
+    "Cereals & Pulses": ["Basmati Rice", "Wheat", "Non Basmati rice", "Sorghum(Jowar)","Maize","Soyabean", "Pear Millet", "red gram","black gram", "green gram"],
+    "Organic Food": ["Organic cereals", "Organic Wheat", "Organic Spices"],
+    "Fruits & Vegetables": ["Lemon", "Onion", "Chilli", "Mango", "Orange", "Brinjal"],
+    Others: ["Custom Items"],
   };
 
   const send = async () => {
