@@ -159,33 +159,50 @@ export default function AboutPage() {
 
           {/* Product Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-center"
-          >
-            <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-              Explore Our Products
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                { label: "Spices", link: "/spices" },
-                { label: "Cereals & Pulses", link: "/cerealsandpulses" },
-                { label: "Organic Foods", link: "/organicfood" },
-                { label: "Fruits & Vegetables", link: "/fruitsandvegetables" },
-                { label: "Others", link: "/others" },
-              ].map((btn, i) => (
-                <motion.div key={i} whileHover={{ scale: 1.05 }}>
-                  <Link
-                    href={btn.link}
-                    className="px-6 py-3 rounded-full bg-[#16a34a] text-white font-medium hover:bg-[#128a3f] transition"
-                  >
-                    {btn.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+  className="text-center px-4"
+>
+  <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-5 sm:mb-6">
+    Explore Our Products
+  </h3>
+
+  <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 sm:gap-4">
+    {[
+      { label: "Spices", link: "/spices" },
+      { label: "Cereals & Pulses", link: "/cerealsandpulses" },
+      { label: "Organic Foods", link: "/organicfood" },
+      { label: "Fruits & Vegetables", link: "/fruitsandvegetables" },
+      { label: "Others", link: "/others" },
+    ].map((btn, i) => (
+      <motion.div
+        key={i}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.97 }}
+      >
+        <Link
+          href={btn.link}
+          className="
+            block
+            px-4 py-2.5
+            sm:px-6 sm:py-3
+            rounded-full
+            bg-[#16a34a]
+            text-white
+            text-sm sm:text-base
+            font-medium
+            hover:bg-[#128a3f]
+            transition
+          "
+        >
+          {btn.label}
+        </Link>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
+
         </div>
       </section>
     </main>
