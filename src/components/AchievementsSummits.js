@@ -6,17 +6,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function AchievementsSummits() {
   const internationalSlides = [
-    { image: "/f1.jpg", title: "Spain Global Trade Summit", desc: "Representing India at Spain’s major international trade platform." },
-    { image: "/f2.jpg", title: "Saudi Arabia Exhibition", desc: "Showcasing Indian agricultural excellence in Riyadh & Jeddah expos." },
-    { image: "/f3.jpg", title: "GulfFoods Dubai", desc: "Participation in one of the world's biggest food trade exhibitions." },
-    { image: "/f4.jpg", title: "European Trade Delegation", desc: "Meeting global buyers, distributors, and trade officials." },
+    { image: "/gallery/Spain.jpg", title: "Spain Global Trade Summit", desc: "Representing India at Spain’s major international trade platform." },
+    { image: "/gallery/SaudiArabia.jpg", title: "Saudi Arabia Exhibition", desc: "Showcasing Indian agricultural excellence in Riyadh & Jeddah expos." },
+    { image: "/gallery/GUlfFood.jpg", title: "GulfFoods Dubai", desc: "Participation in one of the world's biggest food trade exhibitions." },
+    { image: "/gallery/WTC2023.jpg", title: "European Trade Delegation", desc: "Meeting global buyers, distributors, and trade officials." },
   ];
 
   const nationalSlides = [
-    { image: "/f5.jpg", title: "DGFT Summit", desc: "Collaboration with Directorate General of Foreign Trade officials." },
-    { image: "/f6.jpg", title: "World Trade Centre Mumbai", desc: "Presenting Maharashtra’s agricultural potential at WTC." },
-    { image: "/f7.jpg", title: "Delhi IITF", desc: "Featuring in India International Trade Fair for export promotion." },
-    { image: "/f8.jpg", title: "One District One Product", desc: "Representing Nagpur & Amravati oranges on national platform." },
+    { image: "/gallery/dgft.jpg", title: "DGFT Summit", desc: "Collaboration with Directorate General of Foreign Trade officials." },
+    { image: "/gallery/MumbaiWTC.jpg", title: "World Trade Centre Mumbai", desc: "Presenting Maharashtra’s agricultural potential at WTC." },
+    { image: "/gallery/DelhiIITF.jpg", title: "Delhi IITF", desc: "Featuring in India International Trade Fair for export promotion." },
+    { image: "/gallery/ODOP.jpg", title: "One District One Product", desc: "Representing Nagpur & Amravati oranges on national platform." },
   ];
 
   const [intIndex, setIntIndex] = useState(0);

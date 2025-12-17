@@ -5,6 +5,18 @@ import { motion } from "framer-motion";
 export default function GalleryPage() {
   const galleryImages = [
     "/f1.jpg",
+    "/gallery/DelhiIITF.jpg",
+    "/gallery/dgft.jpg",
+    "/gallery/FarmVisit.jpg",
+    "/gallery/GulfFood.jpg",
+    "/gallery/ICARYavatmal.jpg",
+    "/gallery/ICDMihan.jpg",
+    "/gallery/MCED.jpg",
+    "/gallery/ODOP.jpg",
+    "/gallery/PuneAwards.jpg",
+    "/gallery/SaudiArabia.jpg",
+    "/gallery/Spain.jpg",
+    "/gallery/WTC2023.jpg",
     "/f2.jpg",
     "/f3.jpg",
     "/f4.jpg",
