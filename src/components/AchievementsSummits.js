@@ -8,7 +8,7 @@ export default function AchievementsSummits() {
   const internationalSlides = [
     { image: "/gallery/Spain.jpg", title: "Spain Global Trade Summit", desc: "Representing India at Spain’s major international trade platform." },
     { image: "/gallery/SaudiArabia.jpg", title: "Saudi Arabia Exhibition", desc: "Showcasing Indian agricultural excellence in Riyadh & Jeddah expos." },
-    { image: "/gallery/GUlfFood.jpg", title: "GulfFoods Dubai", desc: "Participation in one of the world's biggest food trade exhibitions." },
+    { image: "/gallery/GUlfFood.jpg", title: "Gulf Foods Dubai", desc: "Participation in one of the world's biggest food trade exhibitions." },
     { image: "/gallery/WTC2023.jpg", title: "European Trade Delegation", desc: "Meeting global buyers, distributors, and trade officials." },
   ];
 
