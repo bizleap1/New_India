@@ -527,7 +527,7 @@ export default function EventPage() {
             
             <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
               <Link 
-                href="/register" 
+                href="/events" 
                 className="group relative px-8 py-4 lg:px-12 lg:py-6 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium text-sm lg:text-lg flex items-center justify-center gap-2 lg:gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all"
               >
                 <span className="relative z-10">Register & Pay Securely</span>
