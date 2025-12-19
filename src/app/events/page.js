@@ -71,7 +71,7 @@ export default function EventPage() {
       <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
         {[
           { icon: <FaClock />, label: "10:00 AM – 5:00 PM", sub: "Full Day Immersion" },
-          { icon: <FaCalendarAlt />, label: "27 December 2025", sub: "Friday" },
+          { icon: <FaCalendarAlt />, label: "27 December 2025", sub: "Saturday" },
           { icon: <FaMapMarkerAlt />, label: "Nagpur", sub: "Exclusive Venue" }
         ].map((item, i) => (
           <motion.div 
@@ -167,7 +167,7 @@ export default function EventPage() {
                 <div className="space-y-4 lg:space-y-6 text-neutral-300 text-sm lg:text-lg leading-relaxed">
                   <p>
                     New India Export presents Nagpur's most anticipated Export–Import summit, 
-                    powered by Artificial Intelligence, on Friday, 27th December 2025.
+                    powered by Artificial Intelligence, on Saturday, 27th December 2025.
                   </p>
                   <p>
                     This landmark gathering unites industry leaders, innovators, and visionaries 

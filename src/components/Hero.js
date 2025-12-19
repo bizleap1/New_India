@@ -128,7 +128,7 @@ export default function Hero() {
                     </div>
                     <div>
                       <div className="font-medium text-white text-xs sm:text-sm lg:text-base">27 December 2025</div>
-                      <div className="text-xs text-neutral-400">Friday • 10:00 AM – 5:00 PM</div>
+                      <div className="text-xs text-neutral-400">Saturday • 10:00 AM – 5:00 PM</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
