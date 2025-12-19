@@ -95,6 +95,7 @@ export default function Navbar() {
       ],
     },
     { name: "Gallery", path: "/gallery" },
+    { name: "Events", path: "/events" },
     { name: "Contact Us", path: "/contact" },
     { name: "About Us", path: "/about" },
   ];
