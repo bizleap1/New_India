@@ -172,7 +172,7 @@ export default function EventPage() {
                   <p>
                     This landmark gathering unites industry leaders, innovators, and visionaries 
                     to explore the future of international commerce through cutting‑edge AI technologies, 
-                    compliance frameworks, and global market intelligence.
+                    compliance frameworks and global market intelligence.
                   </p>
                 </div>
 
