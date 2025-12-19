@@ -108,7 +108,7 @@ export default function EventPage() {
         </Link>
 
         <a 
-          href="/brochure.pdf" 
+          href="/BrochureFinal.pdf" 
           download 
           className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
         >
@@ -536,7 +536,7 @@ export default function EventPage() {
               </Link>
               
               <a 
-                href="/brochure.pdf" 
+                href="/BrochureFinal.pdf" 
                 download 
                 className="px-8 py-4 lg:px-12 lg:py-6 rounded-full border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm flex items-center justify-center gap-2 lg:gap-3 hover:border-emerald-800/50 hover:bg-neutral-900/50 transition-all text-sm lg:text-lg"
               >
