@@ -36,7 +36,7 @@ export default function ProductsSection() {
     {
       name: "OTHERS",
       desc: "We also export various other agricultural and food products.",
-      img: "/Others.jpg",
+      img: "/Others2.png",
       link: "/others",
       color: "from-blue-500 to-cyan-600"
     },
