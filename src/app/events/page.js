@@ -61,11 +61,7 @@ export default function EventPage() {
             </p>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-serif leading-[1.1] lg:leading-[0.95] mb-6 lg:mb-8 tracking-tight">
-              <span className="block text-neutral-100">Digital-First</span>
-              <span className="block mt-2 lg:mt-4 bg-gradient-to-r from-neutral-100 via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
-                World Trade Virtual
-              </span>
-              <span className="block mt-2 lg:mt-4 text-neutral-100">Summit 2026</span>
+              World Trade Virtual Summit 2026
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-neutral-300 mb-8 lg:mb-10 max-w-2xl font-light leading-relaxed">

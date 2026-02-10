@@ -1,0 +1,5 @@
+# TODO List for Updating Event Title
+
+- [x] Edit New_India/src/app/events/page.js to simplify the hero title to "World Trade Virtual Summit 2026"
+- [ ] Commit the changes with message "Simplified event title to World Trade Virtual Summit 2026"
+- [ ] Push the changes to the GitHub repository
