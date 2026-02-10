@@ -30,12 +30,12 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px] opacity-50 hidden md:block" />
 
         {/* Floating Elements - Desktop only */}
-        <motion.div 
+        <motion.div
           className="hidden lg:block absolute top-1/4 left-10 w-1 h-24 bg-gradient-to-b from-emerald-500/50 to-transparent"
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
-        <motion.div 
+        <motion.div
           className="hidden lg:block absolute bottom-1/4 right-10 w-24 h-1 bg-gradient-to-r from-emerald-500/30 to-transparent"
           animate={{ x: [0, 20, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
@@ -74,7 +74,7 @@ export default function Hero() {
                 Exporting India's agricultural excellence to the world with precision and trust.
               </p>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
@@ -112,12 +112,12 @@ export default function Hero() {
 
                 {/* Slightly smaller heading for mobile */}
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-serif text-white mb-3 lg:mb-4">
-                  AI Powering Nagpur's Biggest Export–Import Event
+                  New India Export X World Trade Virtual Summit 2026
                 </h2>
 
                 {/* Reduced margin and smaller text for mobile */}
                 <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-3 lg:mb-6 leading-relaxed">
-                  Join Nagpur's first AI‑driven Export–Import leadership summit. Explore the future of international trade through AI‑driven technologies.
+                  Join India's premier virtual leadership summit. Explore the future of digital‑first global trade through technology and expert insights.
                 </p>
 
                 {/* Event Details - Reduced spacing for mobile */}
@@ -127,8 +127,8 @@ export default function Hero() {
                       <FaCalendarAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">27 December 2025</div>
-                      <div className="text-xs text-neutral-400">Saturday • 10:00 AM – 5:00 PM</div>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">27 February 2026</div>
+                      <div className="text-xs text-neutral-400">Friday • 10:00 AM – 5:00 PM</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -136,24 +136,24 @@ export default function Hero() {
                       <FaMapMarkerAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">Nagpur</div>
-                      <div className="text-xs text-neutral-400">KKR Builders, Dharampeth</div>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">Online Session</div>
+                      <div className="text-xs text-neutral-400">Digital Virtual Access</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Action Buttons - Reduced padding for mobile */}
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <Link 
-                    href="/events" 
+                  <Link
+                    href="/events"
                     className="group px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium text-xs sm:text-sm flex items-center justify-center gap-2 overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/25"
                   >
                     <span className="relative z-10">View Event Details</span>
                     <FaChevronRight className="relative z-10 text-xs transition-transform group-hover:translate-x-1" />
                   </Link>
-                  
-                  <Link 
-                    href="/events#register" 
+
+                  <Link
+                    href="/events#register"
                     className="group px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3 rounded-full border border-emerald-800/50 bg-emerald-900/20 text-emerald-300 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 hover:border-emerald-700/50 hover:bg-emerald-900/30 transition-all"
                   >
                     <span>Reserve Your Seat</span>
@@ -164,7 +164,7 @@ export default function Hero() {
           </div>
 
           {/* Scroll Indicator - Desktop only */}
-          <motion.div 
+          <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="absolute bottom-4 lg:bottom-8 left-1/2 transform -translate-x-1/2 hidden lg:block"
