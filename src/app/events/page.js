@@ -186,7 +186,7 @@ export default function EventPage() {
                     {[
                       { title: "Industry", subtitle: "Leading Experts" },
                       { title: "Multiple", subtitle: "Insightful Sessions" },
-                      { title: "First", subtitle: "Of Its Kind in Nagpur" },
+                      { title: "First", subtitle: "Of Its Kind in India" },
                     ].map((item, i) => (
                       <div
                         key={i}
@@ -231,7 +231,7 @@ export default function EventPage() {
                         First
                       </div>
                       <div className="text-sm text-neutral-500 mt-2">
-                        Of Its Kind in Nagpur
+                        Of Its Kind in India
                       </div>
                     </div>
                   </div>
@@ -491,7 +491,7 @@ export default function EventPage() {
                 transition={{ duration: 4, repeat: Infinity }}
                 className="hidden lg:block absolute -top-6 -right-6 bg-gradient-to-br from-black to-neutral-900 border border-neutral-800 rounded-2xl p-4"
               >
-                <div className="text-sm text-emerald-400">First Time in Nagpur</div>
+                <div className="text-sm text-emerald-400">Global Virtual Summit</div>
               </motion.div>
             </motion.div>
           </div>
