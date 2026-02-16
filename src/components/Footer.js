@@ -54,7 +54,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="text-center mt-10 text-sm opacity-90">
+        <div className="text-center mt-10 text-sm opacity-90" suppressHydrationWarning>
           © {new Date().getFullYear()} New India Export. All rights reserved.
         </div>
       </footer>

@@ -8,9 +8,60 @@ import Image from "next/image";
 
 
 
+import { useState } from "react";
+
 export default function EventPage() {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: ""
+  });
 
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.mobile) {
+      alert("Please fill in all details.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:5001/api/payment/initiate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: "1.00", // Test amount
+          customerName: formData.name,
+          customerEmail: formData.email,
+          customerMobile: formData.mobile
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      } else {
+        alert("Payment initiation failed: " + (data.message || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Payment Error Full Details:", error);
+      alert("Error initiating payment: " + (error.message || "Network Error"));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegisterClick = () => {
+    const registerSection = document.getElementById('register');
+    if (registerSection) {
+      registerSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="bg-black text-neutral-100">
@@ -98,9 +149,10 @@ export default function EventPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-4"
             >
               <button
+                onClick={handleRegisterClick}
                 className="group px-6 py-4 lg:px-10 lg:py-5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all cursor-pointer"
               >
                 Reserve Your Seat
@@ -108,12 +160,23 @@ export default function EventPage() {
               </button>
 
               <a
-                href="/BrochureFinal.pdf"
-                download
+                href="/Blue and Black Modern Business Conference Flyer (2).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
               >
                 <FaDownload className="text-emerald-400" />
-                Download Brochure
+                Summit Flyer
+              </a>
+
+              <a
+                href="/Brown White Modern Minimalist Furniture Bi-Fold Brochure (3).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
+              >
+                <FaDownload className="text-emerald-400" />
+                World Trade Virtual Summit 2026
               </a>
             </motion.div>
 
@@ -494,6 +557,8 @@ export default function EventPage() {
         </div>
       </section>
 
+
+
       {/* FINAL CTA */}
       <section id="register" className="relative py-20 lg:py-40 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-black via-emerald-950/10 to-black" />
@@ -521,22 +586,83 @@ export default function EventPage() {
               Join industry pioneers and gain exclusive insights into the future of digital‑first global trade.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
-              <button
-                className="group relative px-8 py-4 lg:px-12 lg:py-6 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium text-sm lg:text-lg flex items-center justify-center gap-2 lg:gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all cursor-pointer"
-              >
-                <span className="relative z-10">Register For Virtual Session</span>
-                <FaChevronRight className="relative z-10 text-sm lg:text-base transition-transform group-hover:translate-x-1 lg:group-hover:translate-x-2" />
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </button>
+            <div className="max-w-xl mx-auto mt-12 p-8 rounded-3xl bg-neutral-900/50 border border-neutral-800 backdrop-blur-xl">
+              <form onSubmit={handlePayment} className="space-y-6 text-left">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-400 mb-2">Full Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Enter your name"
+                    required
+                    className="w-full px-5 py-4 rounded-xl bg-black border border-neutral-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all"
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-400 mb-2">Email Address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="email@example.com"
+                      required
+                      className="w-full px-5 py-4 rounded-xl bg-black border border-neutral-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-400 mb-2">Mobile Number</label>
+                    <input
+                      type="tel"
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleInputChange}
+                      placeholder="+91"
+                      required
+                      className="w-full px-5 py-4 rounded-xl bg-black border border-neutral-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all"
+                    />
+                  </div>
+                </div>
 
+                <div className="pt-4 text-center">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full group relative px-8 py-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-bold text-lg flex items-center justify-center gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? "Processing..." : "Pay & Register Now"}
+                    {!loading && <FaChevronRight className="transition-transform group-hover:translate-x-1" />}
+                  </button>
+                  <p className="text-xs text-neutral-500 mt-4 flex items-center justify-center gap-2 text-center w-full">
+                    <FiCheckCircle className="text-emerald-400" />
+                    Secure payment powered by ICICI Bank PGPay
+                  </p>
+                </div>
+              </form>
+            </div>
+
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 lg:gap-6 justify-center mt-12">
               <a
-                href="/BrochureFinal.pdf"
-                download
+                href="/Blue and Black Modern Business Conference Flyer (2).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 lg:px-12 lg:py-6 rounded-full border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm flex items-center justify-center gap-2 lg:gap-3 hover:border-emerald-800/50 hover:bg-neutral-900/50 transition-all text-sm lg:text-lg"
               >
                 <FaDownload className="text-emerald-400 text-sm lg:text-base" />
-                <span>Detailed Brochure</span>
+                <span>Conference Flyer</span>
+              </a>
+
+              <a
+                href="/Brown White Modern Minimalist Furniture Bi-Fold Brochure (3).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 lg:px-12 lg:py-6 rounded-full border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm flex items-center justify-center gap-2 lg:gap-3 hover:border-emerald-800/50 hover:bg-neutral-900/50 transition-all text-sm lg:text-lg"
+              >
+                <FaDownload className="text-emerald-400 text-sm lg:text-base" />
+                <span>World Trade Virtual Summit 2026</span>
               </a>
             </div>
 
