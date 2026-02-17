@@ -1,22 +1,29 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaDownload, FaChevronRight, FaStar } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaDownload, FaChevronRight, FaStar, FaChevronDown, FaTimes } from "react-icons/fa";
 import { FiCheckCircle } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
 
 
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function EventPage() {
   const [loading, setLoading] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: ""
   });
+
+  // Payment status and order details
+  const [paymentStatus, setPaymentStatus] = useState(null); // 'SUCCESS', 'FAILED', or null
+  const [orderDetails, setOrderDetails] = useState(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,6 +33,10 @@ export default function EventPage() {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.mobile) {
       alert("Please fill in all details.");
+      return;
+    }
+    if (!termsAccepted) {
+      alert("Please accept the Terms & Conditions to proceed.");
       return;
     }
 
@@ -62,6 +73,49 @@ export default function EventPage() {
       registerSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Fetch order details from backend
+  const fetchOrderDetails = async (merchantTxnNo) => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/payment/order/${merchantTxnNo}`);
+      const data = await response.json();
+
+      if (data.success) {
+        setOrderDetails(data.order);
+        setPaymentStatus(data.order.status);
+        setShowPaymentModal(true);
+      } else {
+        console.error('Failed to fetch order details:', data.message);
+        setPaymentStatus('FAILED');
+        setShowPaymentModal(true);
+      }
+    } catch (error) {
+      console.error('Error fetching order details:', error);
+      setPaymentStatus('FAILED');
+      setShowPaymentModal(true);
+    }
+  };
+
+  // Check URL parameters for payment status on page load
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const orderId = urlParams.get('orderId');
+
+    if (status || orderId) {
+      if (orderId) {
+        // Fetch complete order details
+        fetchOrderDetails(orderId);
+      } else if (status) {
+        // Just show status without details
+        setPaymentStatus(status);
+        setShowPaymentModal(true);
+      }
+
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
 
   return (
     <div className="bg-black text-neutral-100">
@@ -627,10 +681,44 @@ export default function EventPage() {
                   </div>
                 </div>
 
-                <div className="pt-4 text-center">
+                <div className="pt-4">
+                  {/* View Terms & Conditions Button */}
+                  <div className="mb-6 text-center">
+                    <button
+                      type="button"
+                      onClick={() => setShowTermsModal(true)}
+                      className="px-6 py-3 rounded-xl border border-neutral-700 bg-neutral-900/60 text-neutral-200 hover:bg-neutral-800 hover:border-emerald-600/50 transition-all flex items-center justify-center gap-2 mx-auto"
+                    >
+                      <FiCheckCircle className="text-emerald-400" />
+                      View Terms & Conditions
+                    </button>
+                  </div>
+
+                  {/* Terms & Conditions Checkbox */}
+                  <div className="mb-6">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={termsAccepted}
+                        onChange={(e) => setTermsAccepted(e.target.checked)}
+                        className="mt-1 w-5 h-5 rounded border-neutral-700 bg-black text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0 cursor-pointer"
+                      />
+                      <span className="text-sm text-neutral-300 leading-relaxed">
+                        I have read and agree to the{" "}
+                        <button
+                          type="button"
+                          onClick={() => setShowTermsModal(true)}
+                          className="text-emerald-400 hover:text-emerald-300 underline transition-colors"
+                        >
+                          Terms & Conditions
+                        </button>
+                      </span>
+                    </label>
+                  </div>
+
                   <button
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || !termsAccepted}
                     className="w-full group relative px-8 py-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-bold text-lg flex items-center justify-center gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? "Processing..." : "Pay & Register Now"}
@@ -672,6 +760,313 @@ export default function EventPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* TERMS & CONDITIONS MODAL */}
+      {showTermsModal && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+          onClick={() => setShowTermsModal(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-4xl max-h-[90vh] bg-gradient-to-b from-neutral-900 to-black rounded-3xl shadow-2xl border border-neutral-800 overflow-hidden"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowTermsModal(false)}
+              className="absolute top-6 right-6 z-10 p-2 rounded-full bg-neutral-800 hover:bg-neutral-700 transition-colors"
+            >
+              <FaTimes className="text-neutral-300 text-xl" />
+            </button>
+
+            {/* Scrollable Content */}
+            <div className="overflow-y-auto max-h-[90vh] p-8 lg:p-12">
+              {/* Header */}
+              <div className="text-center mb-10">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-neutral-100 mb-4">
+                  Terms & Conditions
+                </h2>
+                <p className="text-lg lg:text-xl text-emerald-400 font-medium">
+                  World Trade Summit 2026
+                </p>
+                <p className="text-sm lg:text-base text-neutral-400 mt-4 max-w-3xl mx-auto leading-relaxed">
+                  These Terms and Conditions govern participation in World Trade Summit 2026, organized by New India Export.
+                  By registering for the event, participants agree to comply with the following terms.
+                </p>
+              </div>
+
+              {/* Terms Content */}
+              <div className="space-y-8">
+                {/* 1. Event Details */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">1</span>
+                    Event Details
+                  </h3>
+                  <div className="pl-11 space-y-2 text-neutral-300 leading-relaxed">
+                    <p><strong className="text-neutral-100">Event Name:</strong> World Trade Summit 2026</p>
+                    <p><strong className="text-neutral-100">Organizer:</strong> New India Export</p>
+                    <p><strong className="text-neutral-100">Date:</strong> 27 February 2026</p>
+                    <p><strong className="text-neutral-100">Mode:</strong> Virtual Event</p>
+                  </div>
+                </div>
+
+                {/* 2. Eligibility */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">2</span>
+                    Eligibility for Participation
+                  </h3>
+                  <div className="pl-11">
+                    <p className="text-neutral-300 mb-3">The event is open to:</p>
+                    <ul className="space-y-2 text-neutral-300">
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-1">•</span>
+                        <span>First-time exporters</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-1">•</span>
+                        <span>Entrepreneurs</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-1">•</span>
+                        <span>Manufacturers</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-1">•</span>
+                        <span>Suppliers</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-1">•</span>
+                        <span>Exporters</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-1">•</span>
+                        <span>Importers</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* 3. Registration & Payment */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">3</span>
+                    Registration & Payment Policy
+                  </h3>
+                  <div className="pl-11 space-y-3 text-neutral-300">
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>The registration fee is <strong className="text-neutral-100">₹999</strong> (inclusive of GST)</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Payment must be made only through the official website of New India Export</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Payments made through third-party websites, WhatsApp, or unauthorized channels are not accepted or valid</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Registration is confirmed only after successful payment through the official platform</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* 4. Cancellation & Refund */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">4</span>
+                    Cancellation & Refund Policy
+                  </h3>
+                  <div className="pl-11 space-y-3 text-neutral-300">
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>No refunds will be provided under any circumstances, including late joining, absence, or failure to attend the event</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>If the organizer cancels the event on the scheduled date, a new event date will be announced, and the same registration fee will remain valid for the rescheduled event</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* 5. Event Materials */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">5</span>
+                    Event Materials & Certification
+                  </h3>
+                  <div className="pl-11 text-neutral-300">
+                    <p>Participation certificates and event notes will be provided virtually after the event.</p>
+                  </div>
+                </div>
+
+                {/* 6. Code of Conduct */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">6</span>
+                    Code of Conduct & Safety
+                  </h3>
+                  <div className="pl-11 space-y-3 text-neutral-300">
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Participants must maintain professional and respectful behavior throughout the event</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Use of abusive, offensive, or inappropriate language is strictly prohibited</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Any participant violating event rules or engaging in misconduct will be removed from the event without refund</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* 7. Participation Rules */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">7</span>
+                    Participation Rules
+                  </h3>
+                  <div className="pl-11 space-y-3 text-neutral-300">
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Participants must join the event at the scheduled time</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>Screen recording, unauthorized recording, or redistribution of event content is strictly prohibited</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>The event will not be repeated once completed</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-1">•</span>
+                      <span>If a participant joins late or misses the event, no refund or compensation will be provided</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* 8. Acceptance */}
+                <div className="space-y-4">
+                  <h3 className="text-xl lg:text-2xl font-serif text-neutral-100 flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-900/40 text-emerald-400 text-sm font-bold border border-emerald-800/50">8</span>
+                    Acceptance of Terms
+                  </h3>
+                  <div className="pl-11 text-neutral-300">
+                    <p>By registering for the World Trade Summit 2026, participants confirm that they have read, understood, and agreed to these Terms and Conditions.</p>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="pt-8 mt-8 border-t border-neutral-800">
+                  <div className="text-center">
+                    <p className="text-neutral-400 font-medium mb-2">Organized by:</p>
+                    <p className="text-2xl font-serif text-emerald-400">New India Export</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+      {/* PAYMENT STATUS MODAL */}
+      <AnimatePresence>
+        {showPaymentModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+            onClick={() => setShowPaymentModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-md bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-800 p-8 text-center"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setShowPaymentModal(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800 hover:bg-neutral-700 transition-colors"
+              >
+                <FaTimes className="text-neutral-400" />
+              </button>
+
+              {/* Status Icon */}
+              <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 ${paymentStatus === 'SUCCESS' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
+                }`}>
+                {paymentStatus === 'SUCCESS' ? (
+                  <FiCheckCircle className="text-4xl" />
+                ) : (
+                  <FaTimes className="text-4xl" />
+                )}
+              </div>
+
+              {/* Status Title */}
+              <h2 className="text-2xl lg:text-3xl font-serif text-neutral-100 mb-2">
+                {paymentStatus === 'SUCCESS' ? 'Payment Successful!' : 'Payment Failed'}
+              </h2>
+              <p className="text-neutral-400 mb-8">
+                {paymentStatus === 'SUCCESS'
+                  ? 'Your registration for World Trade Summit 2026 is confirmed.'
+                  : 'There was an issue processing your transaction. Please try again.'}
+              </p>
+
+              {/* Transaction Details */}
+              {orderDetails && (
+                <div className="bg-black/50 rounded-2xl p-6 mb-8 text-left space-y-3 border border-neutral-800">
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-neutral-500">Transaction ID</span>
+                    <span className="text-neutral-200 font-mono">{orderDetails.merchantTxnNo}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-neutral-500">Amount Paid</span>
+                    <span className="text-neutral-200">₹{orderDetails.amount}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-neutral-500">Date</span>
+                    <span className="text-neutral-200">
+                      {orderDetails.paymentCompletedAt
+                        ? new Date(orderDetails.paymentCompletedAt).toLocaleDateString()
+                        : new Date().toLocaleDateString()}
+                    </span>
+                  </div>
+                  {orderDetails.paymentDetails?.paymentMode && (
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-neutral-500">Method</span>
+                      <span className="text-neutral-200">{orderDetails.paymentDetails.paymentMode}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Action Button */}
+              <button
+                onClick={() => setShowPaymentModal(false)}
+                className={`w-full py-4 rounded-xl font-bold transition-all duration-300 ${paymentStatus === 'SUCCESS'
+                  ? 'bg-emerald-500 hover:bg-emerald-600 text-black shadow-lg shadow-emerald-500/20'
+                  : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-100'
+                  }`}
+              >
+                {paymentStatus === 'SUCCESS' ? 'View My Ticket' : 'Close & Try Again'}
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
