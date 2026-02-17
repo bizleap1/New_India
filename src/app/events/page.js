@@ -57,11 +57,10 @@ export default function EventPage() {
       if (data.success && data.redirectUrl) {
         window.location.href = data.redirectUrl;
       } else {
-        alert("Payment initiation failed: " + (data.message || "Unknown error"));
+        alert("Payment initiation failed. Please try again or contact support.");
       }
     } catch (error) {
-      console.error("Payment Error Full Details:", error);
-      alert("Error initiating payment: " + (error.message || "Network Error"));
+      alert("Unable to reach payment gateway. Please check your internet connection and try again.");
     } finally {
       setLoading(false);
     }
@@ -85,13 +84,14 @@ export default function EventPage() {
         setPaymentStatus(data.order.status);
         setShowPaymentModal(true);
       } else {
-        console.error('Failed to fetch order details:', data.message);
-        setPaymentStatus('FAILED');
+        // If order not found, we don't log to console to keep user experience clean
+        // The paymentStatus is already set from URL params if applicable
+        if (!paymentStatus) setPaymentStatus('FAILED');
         setShowPaymentModal(true);
       }
     } catch (error) {
-      console.error('Error fetching order details:', error);
-      setPaymentStatus('FAILED');
+      // Handle network errors silently in production-like environments
+      if (!paymentStatus) setPaymentStatus('FAILED');
       setShowPaymentModal(true);
     }
   };
@@ -99,20 +99,25 @@ export default function EventPage() {
   // Check URL parameters for payment status on page load
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    const payment = urlParams.get('payment');
     const status = urlParams.get('status');
     const orderId = urlParams.get('orderId');
 
-    if (status || orderId) {
-      if (orderId) {
-        // Fetch complete order details
-        fetchOrderDetails(orderId);
-      } else if (status) {
-        // Just show status without details
-        setPaymentStatus(status);
+    if (payment || status || orderId) {
+      if (payment === 'success' || status === 'SUCCESS') {
+        setPaymentStatus('SUCCESS');
+        setShowPaymentModal(true);
+      } else if (payment === 'failed' || status === 'FAILED') {
+        setPaymentStatus('FAILED');
         setShowPaymentModal(true);
       }
 
-      // Clean up URL
+      if (orderId) {
+        // Fetch complete order details if we have an ID
+        fetchOrderDetails(orderId);
+      }
+
+      // Clean up URL to keep it pretty
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);

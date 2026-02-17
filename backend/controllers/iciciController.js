@@ -2,6 +2,7 @@ const https = require('https');
 const crypto = require('crypto');
 const fs = require('fs');
 const Order = require('../models/Order');
+const Payment = require('../models/Payment');
 const { generateSecureHash, verifySecureHash } = require('../utils/hashGenerator');
 
 /**
@@ -181,13 +182,8 @@ exports.handleResponse = async (req, res) => {
             console.error("❌ [ERROR] No transaction ID found in callback payload.");
             console.error("📦 FULL CALLBACK PAYLOAD:", JSON.stringify(callbackData, null, 2));
 
-            // Return JSON response (some gateways need 200 status to stop retrying)
-            return res.status(200).json({
-                success: false,
-                error: "MISSING_ORDER_ID",
-                message: "No order identifier found in payment callback. Please check field names.",
-                receivedFields: Object.keys(callbackData)
-            });
+            const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:3000").trim();
+            return res.redirect(`${frontendUrl}/events?payment=failed&reason=missing_id`);
         }
 
         // Look up order in database (Case-Insensitive Match)
@@ -200,22 +196,8 @@ exports.handleResponse = async (req, res) => {
             console.error("❌ [ERROR] Order NOT found in database.");
             console.error("Searched for (Case-Insensitive):", merchantTxnNo);
 
-            // Check if there are any orders at all
-            const totalOrders = await Order.countDocuments();
-            console.log("📊 Total orders in database:", totalOrders);
-
-            if (totalOrders > 0) {
-                const recentOrders = await Order.find().sort({ createdAt: -1 }).limit(5).select('merchantTxnNo status createdAt');
-                console.log("📋 Recent orders:", JSON.stringify(recentOrders, null, 2));
-            }
-
-            return res.status(200).json({
-                success: false,
-                error: "ORDER_NOT_FOUND",
-                message: `Order not found for transaction ID: ${merchantTxnNo}`,
-                searchedFor: merchantTxnNo,
-                totalOrdersInDb: totalOrders
-            });
+            const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:3000").trim();
+            return res.redirect(`${frontendUrl}/events?payment=failed&reason=order_not_found&orderId=${merchantTxnNo}`);
         }
 
         console.log("✅ Order found:", order.merchantTxnNo);
@@ -266,7 +248,7 @@ exports.handleResponse = async (req, res) => {
         // IMPORTANT: Use the merchantTxnNo from the FOUND order object to ensure consistency
         const finalOrderId = order.merchantTxnNo;
         const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:3000").trim();
-        const redirectUrl = `${frontendUrl}/events?status=${newStatus}&orderId=${finalOrderId}`;
+        const redirectUrl = `${frontendUrl}/events?payment=${isSuccess ? 'success' : 'failed'}&status=${newStatus}&orderId=${finalOrderId}`;
 
         console.log("🔄 Redirecting to:", redirectUrl);
         res.redirect(redirectUrl);
@@ -278,13 +260,9 @@ exports.handleResponse = async (req, res) => {
         console.error("Error Stack:", error.stack);
         console.error("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
-        // Return JSON error response
-        res.status(200).json({
-            success: false,
-            error: "CALLBACK_PROCESSING_ERROR",
-            message: "Error processing payment callback",
-            details: error.message
-        });
+        // Redirect to frontend with failed status
+        const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:3000").trim();
+        res.redirect(`${frontendUrl}/events?payment=failed&reason=processing_error`);
     }
 };
 
