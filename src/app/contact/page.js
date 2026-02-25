@@ -16,7 +16,7 @@ export default function ContactPage() {
     const { name, email, message } = formData;
     const whatsappMessage = `Hello, my name is ${name}.\nEmail: ${email}\n\nMessage:\n${message}`;
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    window.open(`https://wa.me/919967084149?text=${encodedMessage}`, "_blank");
+    window.open(`https://wa.me/919028894149?text=${encodedMessage}`, "_blank");
   };
 
   return (
@@ -79,7 +79,7 @@ export default function ContactPage() {
                 <p className="text-lg">
                   <span className="font-semibold">Phone:</span>{" "}
                   <span className="text-[#16a34a] font-medium">
-                    +91 99670 84149
+                    +91 90288 94149
                   </span>
                 </p>
               </div>

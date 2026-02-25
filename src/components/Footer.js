@@ -25,7 +25,7 @@ export default function Footer() {
             <p className="text-sm">
               Shop No M02, Premium Plaza Commercial Complex, Dharampeth, Nagpur 440010
             </p>
-            <p className="text-sm">Phone: 9967084149</p>
+            <p className="text-sm">Phone: 90288 94149</p>
             <p className="text-sm">Email: Newindexport@gmail.com</p>
           </div>
 
@@ -46,7 +46,7 @@ export default function Footer() {
             <h2 className="text-xl font-bold">Connect with Us</h2>
             <p className="text-sm">Follow us on social media for updates!</p>
             <div className="flex space-x-4 mt-2">
-              <a href="https://wa.me/919967084149" target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 p-2 rounded-full transition">
+              <a href="https://wa.me/919028894149" target="_blank" rel="noopener noreferrer" className="bg-green-600 hover:bg-green-700 p-2 rounded-full transition">
                 <MessageCircle size={24} />
               </a>
               {/* You can add more social icons here */}
@@ -61,7 +61,7 @@ export default function Footer() {
 
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/919967084149"
+        href="https://wa.me/919028894149"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-24 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center"

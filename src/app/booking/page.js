@@ -22,7 +22,7 @@ Email: ${email}
 Address: ${address}
 Country: ${country}`;
 
-    window.location.href = `mailto:mbbhajgawre@gmail.com?subject=Booking Request&body=${encodeURIComponent(message)}`;
+    window.location.href = `mailto:Newindexport@gmail.com?subject=Booking Request&body=${encodeURIComponent(message)}`;
   };
 
   const Popup = ({ children }) => (
