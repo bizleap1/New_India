@@ -127,7 +127,7 @@ export default function Hero() {
                       <FaCalendarAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">27 February 2026</div>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">29 February 2026</div>
                       <div className="text-xs text-neutral-400">Friday • 10:00 AM – 5:00 PM</div>
                     </div>
                   </div>
@@ -138,6 +138,26 @@ export default function Hero() {
                     <div>
                       <div className="font-medium text-white text-xs sm:text-sm lg:text-base">Online Session</div>
                       <div className="text-xs text-neutral-400">Digital Virtual Access</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Pricing Section */}
+                <div className="relative mb-6 group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                  <div className="relative flex items-center justify-between p-4 sm:p-5 rounded-xl bg-black border border-emerald-500/30 backdrop-blur-xl">
+                    <div className="flex flex-col">
+                      <span className="inline-block px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-2 w-fit">
+                        Special Offer
+                      </span>
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹999</span>
+                        <span className="text-lg text-neutral-500 line-through decoration-emerald-500 decoration-2">₹1500</span>
+                      </div>
+                    </div>
+                    <div className="hidden sm:block">
+                      <div className="px-3 py-1 rounded-full bg-emerald-500 text-black text-xs font-bold">
+                        33% OFF
+                      </div>
                     </div>
                   </div>
                 </div>

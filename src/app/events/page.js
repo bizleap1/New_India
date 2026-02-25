@@ -182,7 +182,7 @@ export default function EventPage() {
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
               {[
                 { icon: <FaClock />, label: "10:00 AM – 5:00 PM", sub: "Full Day Virtual Immersion" },
-                { icon: <FaCalendarAlt />, label: "27 February 2026", sub: "Friday" },
+                { icon: <FaCalendarAlt />, label: "29 February 2026", sub: "Friday" },
                 { icon: <FaMapMarkerAlt />, label: "Online Session", sub: "Virtual Access" }
               ].map((item, i) => (
                 <motion.div
@@ -202,6 +202,33 @@ export default function EventPage() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Pricing Section */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.7 }}
+              className="relative mb-10 max-w-sm group"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+              <div className="relative flex items-center justify-between p-6 rounded-2xl bg-neutral-900/80 border border-emerald-500/30 backdrop-blur-xl shadow-2xl">
+                <div className="flex flex-col">
+                  <span className="inline-block px-3 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3 w-fit">
+                    Special Offer
+                  </span>
+                  <div className="flex items-baseline gap-4">
+                    <span className="text-4xl lg:text-5xl font-black text-white tracking-tight">₹999</span>
+                    <span className="text-xl text-neutral-500 line-through decoration-emerald-500/50 decoration-2">₹1500</span>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end gap-2">
+                  <div className="px-4 py-1.5 rounded-full bg-emerald-500 text-black text-sm font-black shadow-lg shadow-emerald-500/20">
+                    33% OFF
+                  </div>
+                  <div className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">LIMITED SLOTS</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* CTA */}
             <motion.div
@@ -289,7 +316,7 @@ export default function EventPage() {
                 <div className="space-y-4 lg:space-y-6 text-neutral-300 text-sm lg:text-lg leading-relaxed">
                   <p>
                     New India Export presents the World Trade Virtual Summit 2026,
-                    an exclusive online session on Friday, 27th February 2026.
+                    an exclusive online session on Friday, 29th February 2026.
                   </p>
                   <p>
                     This landmark digital gathering unites industry leaders, innovators, and visionaries
@@ -817,7 +844,7 @@ export default function EventPage() {
                   <div className="pl-11 space-y-2 text-neutral-300 leading-relaxed">
                     <p><strong className="text-neutral-100">Event Name:</strong> World Trade Summit 2026</p>
                     <p><strong className="text-neutral-100">Organizer:</strong> New India Export</p>
-                    <p><strong className="text-neutral-100">Date:</strong> 27 February 2026</p>
+                    <p><strong className="text-neutral-100">Date:</strong> 29 February 2026</p>
                     <p><strong className="text-neutral-100">Mode:</strong> Virtual Event</p>
                   </div>
                 </div>
