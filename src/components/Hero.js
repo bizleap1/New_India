@@ -127,8 +127,8 @@ export default function Hero() {
                       <FaCalendarAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">29 February 2026</div>
-                      <div className="text-xs text-neutral-400">Friday • 10:00 AM – 5:00 PM</div>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">1 March 2026</div>
+                      <div className="text-xs text-neutral-400">Sunday • 11:00 AM – 5:00 PM</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
