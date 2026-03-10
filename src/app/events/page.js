@@ -182,7 +182,7 @@ export default function EventPage() {
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
               {[
                 { icon: <FaClock />, label: "11:00 AM – 5:00 PM", sub: "Full Day Virtual Immersion" },
-                { icon: <FaCalendarAlt />, label: "1 March 2026", sub: "Sunday" },
+                { icon: <FaCalendarAlt />, label: "15 March 2026", sub: "Sunday" },
                 { icon: <FaMapMarkerAlt />, label: "Online Session", sub: "Virtual Access" }
               ].map((item, i) => (
                 <motion.div
@@ -316,7 +316,7 @@ export default function EventPage() {
                 <div className="space-y-4 lg:space-y-6 text-neutral-300 text-sm lg:text-lg leading-relaxed">
                   <p>
                     New India Export presents the World Trade Virtual Summit 2026,
-                    an exclusive online session on Sunday, 1st March 2026.
+                    an exclusive online session on Sunday, 15th March 2026.
                   </p>
                   <p>
                     This landmark digital gathering unites industry leaders, innovators, and visionaries
