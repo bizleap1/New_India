@@ -164,7 +164,7 @@ Mobile: ${formData.mobile}`;
             {/* Event Details */}
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
               {[
-                { icon: <FaClock />, label: "11:00 AM – 5:00 PM", sub: "Full Day Virtual Immersion" },
+                { icon: <FaClock />, label: "12:00 PM – 2:30 PM", sub: "Virtual Immersion" },
                 { icon: <FaCalendarAlt />, label: "22 March 2026", sub: "Sunday" },
                 { icon: <FaMapMarkerAlt />, label: "Online Session", sub: "Virtual Access" }
               ].map((item, i) => (
