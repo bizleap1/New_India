@@ -40,30 +40,13 @@ export default function EventPage() {
       return;
     }
 
-    setLoading(true);
-    try {
-      const response = await fetch("http://localhost:5001/api/payment/initiate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: "1.00", // Test amount
-          customerName: formData.name,
-          customerEmail: formData.email,
-          customerMobile: formData.mobile
-        }),
-      });
+    const message = `Hello, I would like to reserve my seat for the World Trade Virtual Summit 2026.
+Name: ${formData.name}
+Email: ${formData.email}
+Mobile: ${formData.mobile}`;
 
-      const data = await response.json();
-      if (data.success && data.redirectUrl) {
-        window.location.href = data.redirectUrl;
-      } else {
-        alert("Payment initiation failed. Please try again or contact support.");
-      }
-    } catch (error) {
-      alert("Unable to reach payment gateway. Please check your internet connection and try again.");
-    } finally {
-      setLoading(false);
-    }
+    const whatsappUrl = `https://wa.me/919028894149?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const handleRegisterClick = () => {
@@ -182,7 +165,7 @@ export default function EventPage() {
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
               {[
                 { icon: <FaClock />, label: "11:00 AM – 5:00 PM", sub: "Full Day Virtual Immersion" },
-                { icon: <FaCalendarAlt />, label: "15 March 2026", sub: "Sunday" },
+                { icon: <FaCalendarAlt />, label: "22 March 2026", sub: "Sunday" },
                 { icon: <FaMapMarkerAlt />, label: "Online Session", sub: "Virtual Access" }
               ].map((item, i) => (
                 <motion.div
@@ -217,13 +200,13 @@ export default function EventPage() {
                     Special Offer
                   </span>
                   <div className="flex items-baseline gap-4">
-                    <span className="text-4xl lg:text-5xl font-black text-white tracking-tight">₹999</span>
-                    <span className="text-xl text-neutral-500 line-through decoration-emerald-500/50 decoration-2">₹1500</span>
+                    <span className="text-4xl lg:text-5xl font-black text-white tracking-tight">₹149</span>
+                    <span className="text-xl text-neutral-500 line-through decoration-emerald-500/50 decoration-2">₹299</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <div className="px-4 py-1.5 rounded-full bg-emerald-500 text-black text-sm font-black shadow-lg shadow-emerald-500/20">
-                    33% OFF
+                    50% OFF
                   </div>
                   <div className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">LIMITED SLOTS</div>
                 </div>
@@ -237,13 +220,15 @@ export default function EventPage() {
               transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row flex-wrap gap-4"
             >
-              <button
-                onClick={handleRegisterClick}
+              <a
+                href="https://wa.me/919028894149"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group px-6 py-4 lg:px-10 lg:py-5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all cursor-pointer"
               >
                 Reserve Your Seat
                 <FaChevronRight className="transition-transform group-hover:translate-x-1" />
-              </button>
+              </a>
 
               <a
                 href="/Blue and Black Modern Business Conference Flyer (2).pdf"
@@ -316,7 +301,7 @@ export default function EventPage() {
                 <div className="space-y-4 lg:space-y-6 text-neutral-300 text-sm lg:text-lg leading-relaxed">
                   <p>
                     New India Export presents the World Trade Virtual Summit 2026,
-                    an exclusive online session on Sunday, 15th March 2026.
+                    an exclusive online session on Sunday, 22nd March 2026.
                   </p>
                   <p>
                     This landmark digital gathering unites industry leaders, innovators, and visionaries

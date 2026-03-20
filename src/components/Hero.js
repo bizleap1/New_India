@@ -127,7 +127,7 @@ export default function Hero() {
                       <FaCalendarAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">15 March 2026</div>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">22 March 2026</div>
                       <div className="text-xs text-neutral-400">Sunday • 11:00 AM – 5:00 PM</div>
                     </div>
                   </div>
@@ -150,13 +150,13 @@ export default function Hero() {
                         Special Offer
                       </span>
                       <div className="flex items-baseline gap-3">
-                        <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹999</span>
-                        <span className="text-lg text-neutral-500 line-through decoration-emerald-500 decoration-2">₹1500</span>
+                        <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹149</span>
+                        <span className="text-lg text-neutral-500 line-through decoration-emerald-500 decoration-2">₹299</span>
                       </div>
                     </div>
                     <div className="hidden sm:block">
                       <div className="px-3 py-1 rounded-full bg-emerald-500 text-black text-xs font-bold">
-                        33% OFF
+                        50% OFF
                       </div>
                     </div>
                   </div>
@@ -172,12 +172,14 @@ export default function Hero() {
                     <FaChevronRight className="relative z-10 text-xs transition-transform group-hover:translate-x-1" />
                   </Link>
 
-                  <Link
-                    href="/events#register"
+                  <a
+                    href="https://wa.me/919028894149"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3 rounded-full border border-emerald-800/50 bg-emerald-900/20 text-emerald-300 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 hover:border-emerald-700/50 hover:bg-emerald-900/30 transition-all"
                   >
                     <span>Reserve Your Seat</span>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>
