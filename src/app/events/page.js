@@ -11,7 +11,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function EventPage() {
-  const [loading, setLoading] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -20,10 +19,7 @@ export default function EventPage() {
     mobile: ""
   });
 
-  // Payment status and order details
-  const [paymentStatus, setPaymentStatus] = useState(null); // 'SUCCESS', 'FAILED', or null
-  const [orderDetails, setOrderDetails] = useState(null);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
+
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -56,54 +52,7 @@ Mobile: ${formData.mobile}`;
     }
   };
 
-  // Fetch order details from backend
-  const fetchOrderDetails = async (merchantTxnNo) => {
-    try {
-      const response = await fetch(`http://localhost:5001/api/payment/order/${merchantTxnNo}`);
-      const data = await response.json();
 
-      if (data.success) {
-        setOrderDetails(data.order);
-        setPaymentStatus(data.order.status);
-        setShowPaymentModal(true);
-      } else {
-        // If order not found, we don't log to console to keep user experience clean
-        // The paymentStatus is already set from URL params if applicable
-        if (!paymentStatus) setPaymentStatus('FAILED');
-        setShowPaymentModal(true);
-      }
-    } catch (error) {
-      // Handle network errors silently in production-like environments
-      if (!paymentStatus) setPaymentStatus('FAILED');
-      setShowPaymentModal(true);
-    }
-  };
-
-  // Check URL parameters for payment status on page load
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const payment = urlParams.get('payment');
-    const status = urlParams.get('status');
-    const orderId = urlParams.get('orderId');
-
-    if (payment || status || orderId) {
-      if (payment === 'success' || status === 'SUCCESS') {
-        setPaymentStatus('SUCCESS');
-        setShowPaymentModal(true);
-      } else if (payment === 'failed' || status === 'FAILED') {
-        setPaymentStatus('FAILED');
-        setShowPaymentModal(true);
-      }
-
-      if (orderId) {
-        // Fetch complete order details if we have an ID
-        fetchOrderDetails(orderId);
-      }
-
-      // Clean up URL to keep it pretty
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }, []);
 
   return (
     <div className="bg-black text-neutral-100">
@@ -735,15 +684,15 @@ Mobile: ${formData.mobile}`;
 
                   <button
                     type="submit"
-                    disabled={loading || !termsAccepted}
+                    disabled={!termsAccepted}
                     className="w-full group relative px-8 py-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-bold text-lg flex items-center justify-center gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {loading ? "Processing..." : "Pay & Register Now"}
-                    {!loading && <FaChevronRight className="transition-transform group-hover:translate-x-1" />}
+                    Reserve Now via WhatsApp
+                    <FaChevronRight className="transition-transform group-hover:translate-x-1" />
                   </button>
                   <p className="text-xs text-neutral-500 mt-4 flex items-center justify-center gap-2 text-center w-full">
                     <FiCheckCircle className="text-emerald-400" />
-                    Secure payment powered by ICICI Bank PGPay
+                    Reservation handled via WhatsApp Business
                   </p>
                 </div>
               </form>
@@ -884,15 +833,15 @@ Mobile: ${formData.mobile}`;
                     </p>
                     <p className="flex items-start gap-2">
                       <span className="text-emerald-400 mt-1">•</span>
-                      <span>Payment must be made only through the official website of New India Export</span>
+                      <span>Payment and registration are finalized through our official WhatsApp Business channel</span>
                     </p>
                     <p className="flex items-start gap-2">
                       <span className="text-emerald-400 mt-1">•</span>
-                      <span>Payments made through third-party websites, WhatsApp, or unauthorized channels are not accepted or valid</span>
+                      <span>Please follow the instructions provided by our representative after initiating the request</span>
                     </p>
                     <p className="flex items-start gap-2">
                       <span className="text-emerald-400 mt-1">•</span>
-                      <span>Registration is confirmed only after successful payment through the official platform</span>
+                      <span>Registration is confirmed only after verification by New India Export</span>
                     </p>
                   </div>
                 </div>
@@ -997,93 +946,7 @@ Mobile: ${formData.mobile}`;
           </motion.div>
         </motion.div>
       )}
-      {/* PAYMENT STATUS MODAL */}
-      <AnimatePresence>
-        {showPaymentModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
-            onClick={() => setShowPaymentModal(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-md bg-neutral-900 rounded-3xl shadow-2xl border border-neutral-800 p-8 text-center"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setShowPaymentModal(false)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-neutral-800 hover:bg-neutral-700 transition-colors"
-              >
-                <FaTimes className="text-neutral-400" />
-              </button>
 
-              {/* Status Icon */}
-              <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 ${paymentStatus === 'SUCCESS' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
-                }`}>
-                {paymentStatus === 'SUCCESS' ? (
-                  <FiCheckCircle className="text-4xl" />
-                ) : (
-                  <FaTimes className="text-4xl" />
-                )}
-              </div>
-
-              {/* Status Title */}
-              <h2 className="text-2xl lg:text-3xl font-serif text-neutral-100 mb-2">
-                {paymentStatus === 'SUCCESS' ? 'Payment Successful!' : 'Payment Failed'}
-              </h2>
-              <p className="text-neutral-400 mb-8">
-                {paymentStatus === 'SUCCESS'
-                  ? 'Your registration for World Trade Summit 2026 is confirmed.'
-                  : 'There was an issue processing your transaction. Please try again.'}
-              </p>
-
-              {/* Transaction Details */}
-              {orderDetails && (
-                <div className="bg-black/50 rounded-2xl p-6 mb-8 text-left space-y-3 border border-neutral-800">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-neutral-500">Transaction ID</span>
-                    <span className="text-neutral-200 font-mono">{orderDetails.merchantTxnNo}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-neutral-500">Amount Paid</span>
-                    <span className="text-neutral-200">₹{orderDetails.amount}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-neutral-500">Date</span>
-                    <span className="text-neutral-200">
-                      {orderDetails.paymentCompletedAt
-                        ? new Date(orderDetails.paymentCompletedAt).toLocaleDateString()
-                        : new Date().toLocaleDateString()}
-                    </span>
-                  </div>
-                  {orderDetails.paymentDetails?.paymentMode && (
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-neutral-500">Method</span>
-                      <span className="text-neutral-200">{orderDetails.paymentDetails.paymentMode}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Action Button */}
-              <button
-                onClick={() => setShowPaymentModal(false)}
-                className={`w-full py-4 rounded-xl font-bold transition-all duration-300 ${paymentStatus === 'SUCCESS'
-                  ? 'bg-emerald-500 hover:bg-emerald-600 text-black shadow-lg shadow-emerald-500/20'
-                  : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-100'
-                  }`}
-              >
-                {paymentStatus === 'SUCCESS' ? 'View My Ticket' : 'Close & Try Again'}
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
