@@ -112,12 +112,12 @@ export default function Hero() {
 
                 {/* Slightly smaller heading for mobile */}
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-serif text-white mb-3 lg:mb-4">
-                  New India Export X World Trade Virtual Summit 2026
+                  New India Export X Virtual Shipment Workshop (5 Days)
                 </h2>
 
                 {/* Reduced margin and smaller text for mobile */}
                 <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-3 lg:mb-6 leading-relaxed">
-                  Join India's premier virtual leadership summit. Explore the future of digital‑first global trade through technology and expert insights.
+                  Master the complete export cycle in this intensive 5-day workshop designed for future-ready global trade entrepreneurs.
                 </p>
 
                 {/* Event Details - Reduced spacing for mobile */}
@@ -127,8 +127,8 @@ export default function Hero() {
                       <FaCalendarAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">22 March 2026</div>
-                      <div className="text-xs text-neutral-400">Sunday • 12:00 PM – 2:30 PM</div>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">02 – 06 May 2026</div>
+                      <div className="text-xs text-neutral-400">Saturday – Wednesday • 11:00 AM – 2:00 PM</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -136,8 +136,8 @@ export default function Hero() {
                       <FaMapMarkerAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">Online Session</div>
-                      <div className="text-xs text-neutral-400">Digital Virtual Access</div>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">Online Workshop</div>
+                      <div className="text-xs text-neutral-400">5-Day Intensive Access</div>
                     </div>
                   </div>
                 </div>
@@ -150,13 +150,13 @@ export default function Hero() {
                         Special Offer
                       </span>
                       <div className="flex items-baseline gap-3">
-                        <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹149</span>
-                        <span className="text-lg text-neutral-500 line-through decoration-emerald-500 decoration-2">₹299</span>
+                        <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹6399</span>
+                        <span className="text-lg text-neutral-500 line-through decoration-emerald-500 decoration-2">₹34999</span>
                       </div>
                     </div>
                     <div className="hidden sm:block">
                       <div className="px-3 py-1 rounded-full bg-emerald-500 text-black text-xs font-bold">
-                        50% OFF
+                        80% OFF
                       </div>
                     </div>
                   </div>

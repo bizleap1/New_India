@@ -62,17 +62,12 @@ export default function Navbar() {
 
   const brochures = [
     {
-      name: "Summit Flyer",
-      path: "/Blue and Black Modern Business Conference Flyer (2).pdf",
+      name: "Workshop Flyer",
+      path: "/new india (4).pdf",
       type: "download"
     },
     {
-      name: "World Trade Virtual Summit 2026",
-      path: "/Brown White Modern Minimalist Furniture Bi-Fold Brochure (3).pdf",
-      type: "download"
-    },
-    {
-      name: "Summit Details",
+      name: "Workshop Brochure",
       path: "/BrochureFinal.pdf",
       type: "download"
     }
