@@ -36,7 +36,7 @@ export default function EventPage() {
       return;
     }
 
-    const message = `Hello, I would like to reserve my seat for the World Trade Virtual Summit 2026.
+    const message = `Hello, I would like to reserve my seat for the Virtual Shipment Workshop (5 Days).
 Name: ${formData.name}
 Email: ${formData.email}
 Mobile: ${formData.mobile}`;
@@ -99,23 +99,23 @@ Mobile: ${formData.mobile}`;
           <div className="max-w-4xl">
 
             <p className="text-xs lg:text-sm tracking-[0.25em] uppercase text-emerald-400/80 mb-4 lg:mb-6 font-light">
-              New India Export X World Trade Virtual Summit 2026
+              New India Export X Virtual Shipment Workshop (5 Days)
             </p>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-serif leading-[1.1] lg:leading-[0.95] mb-6 lg:mb-8 tracking-tight">
-              World Trade Virtual Summit 2026
+              Virtual Shipment Workshop
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-neutral-300 mb-8 lg:mb-10 max-w-2xl font-light leading-relaxed">
-              India's premier virtual leadership summit where technology meets global trade excellence for the future-ready legacy exporters.
+              Master the complete export cycle in this intensive 5-day workshop designed for future-ready global trade entrepreneurs.
             </p>
 
             {/* Event Details */}
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
               {[
-                { icon: <FaClock />, label: "12:00 PM – 2:30 PM", sub: "Virtual Immersion" },
-                { icon: <FaCalendarAlt />, label: "22 March 2026", sub: "Sunday" },
-                { icon: <FaMapMarkerAlt />, label: "Online Session", sub: "Virtual Access" }
+                { icon: <FaClock />, label: "11:00 AM – 2:00 PM", sub: "5-Day Intensive" },
+                { icon: <FaCalendarAlt />, label: "02 – 06 May 2026", sub: "Saturday – Wednesday" },
+                { icon: <FaMapMarkerAlt />, label: "Online Workshop", sub: "Virtual Access" }
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -149,13 +149,13 @@ Mobile: ${formData.mobile}`;
                     Special Offer
                   </span>
                   <div className="flex items-baseline gap-4">
-                    <span className="text-4xl lg:text-5xl font-black text-white tracking-tight">₹149</span>
-                    <span className="text-xl text-neutral-500 line-through decoration-emerald-500/50 decoration-2">₹299</span>
+                    <span className="text-4xl lg:text-5xl font-black text-white tracking-tight">₹6399</span>
+                    <span className="text-xl text-neutral-500 line-through decoration-emerald-500/50 decoration-2">₹34999</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <div className="px-4 py-1.5 rounded-full bg-emerald-500 text-black text-sm font-black shadow-lg shadow-emerald-500/20">
-                    50% OFF
+                    80% OFF
                   </div>
                   <div className="text-[10px] text-neutral-500 uppercase tracking-widest font-bold">LIMITED SLOTS</div>
                 </div>
@@ -180,23 +180,23 @@ Mobile: ${formData.mobile}`;
               </a>
 
               <a
-                href="/Blue and Black Modern Business Conference Flyer (2).pdf"
+                href="/new india (4).pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
               >
                 <FaDownload className="text-emerald-400" />
-                Summit Flyer
+                Workshop Flyer
               </a>
 
               <a
-                href="/Brown White Modern Minimalist Furniture Bi-Fold Brochure (3).pdf"
+                href="/BrochureFinal.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
               >
                 <FaDownload className="text-emerald-400" />
-                World Trade Virtual Summit 2026
+                Workshop Brochure
               </a>
             </motion.div>
 
@@ -219,11 +219,11 @@ Mobile: ${formData.mobile}`;
             {[...Array(4)].map((_, i) => (
               <div key={i} className="flex items-center gap-6 lg:gap-16 text-sm lg:text-2xl font-light">
                 <span className="text-emerald-400/80 text-lg lg:text-xl">✦</span>
-                <span className="text-neutral-300">World Trade Summit 2026</span>
+                <span className="text-neutral-300">Virtual Shipment Workshop</span>
                 <span className="text-emerald-400/80 text-lg lg:text-xl">✦</span>
-                <span className="text-neutral-300">Digital‑First Trade</span>
+                <span className="text-neutral-300">5-Day Mastery</span>
                 <span className="text-emerald-400/80 text-lg lg:text-xl">✦</span>
-                <span className="text-neutral-300">Industry Experts</span>
+                <span className="text-neutral-300">Expert Guidance</span>
               </div>
             ))}
           </motion.div>
@@ -241,21 +241,20 @@ Mobile: ${formData.mobile}`;
               transition={{ duration: 0.8 }}
             >
               <div className="relative">
-                <div className="text-xs lg:text-sm tracking-widest uppercase text-emerald-400 mb-4 lg:mb-6">About the Summit</div>
+                <div className="text-xs lg:text-sm tracking-widest uppercase text-emerald-400 mb-4 lg:mb-6">About the Workshop</div>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif leading-tight mb-6 lg:mb-10">
-                  Mastering Global Trade
-                  <span className="block text-emerald-400">Virtually & Beyond</span>
+                  Mastering Shipment
+                  <span className="block text-emerald-400">Virtually & Globally</span>
                 </h2>
 
                 <div className="space-y-4 lg:space-y-6 text-neutral-300 text-sm lg:text-lg leading-relaxed">
                   <p>
-                    New India Export presents the World Trade Virtual Summit 2026,
-                    an exclusive online session on Sunday, 22nd March 2026.
+                    New India Export presents the Virtual Shipment Workshop,
+                    an intensive 5-day program from 2nd May to 6th May 2026.
                   </p>
                   <p>
-                    This landmark digital gathering unites industry leaders, innovators, and visionaries
-                    to explore the future of international commerce through digital-first strategies,
-                    compliance frameworks and global market intelligence.
+                    This comprehensive workshop is designed to bridge the gap between local production and global distribution,
+                    covering everything from documentation and customs to logistics planning and market trends.
                   </p>
                 </div>
 
@@ -350,7 +349,7 @@ Mobile: ${formData.mobile}`;
                 className="hidden lg:block absolute -bottom-6 -right-6 bg-gradient-to-br from-neutral-900 to-black border border-neutral-800 rounded-2xl p-6 max-w-xs backdrop-blur-sm"
               >
                 <FiCheckCircle className="text-emerald-400 text-2xl mb-3" />
-                <p className="text-sm text-neutral-300">Real‑time digital trade simulations and live case studies</p>
+                <p className="text-sm text-neutral-300">Live Custom process walkthroughs and real-time logistics planning</p>
               </motion.div>
             </motion.div>
           </div>
@@ -368,33 +367,33 @@ Mobile: ${formData.mobile}`;
             viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-10 lg:mb-20"
           >
-            <div className="text-xs lg:text-sm tracking-widest uppercase text-emerald-400 mb-3 lg:mb-4">Key Insights</div>
+            <div className="text-xs lg:text-sm tracking-widest uppercase text-emerald-400 mb-3 lg:mb-4">Workshop Curriculum</div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif mb-4 lg:mb-6">What You'll Learn</h2>
             <p className="text-sm lg:text-xl text-neutral-400 max-w-3xl mx-auto px-4">
-              Master the intersection of technology and global trade through focused virtual sessions
+              Master the essential pillars of international trade through our structured 5-day intensive curriculum
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {[
               {
-                title: "International Trade & Global Markets",
-                desc: "Key inputs for navigating the complexities of the current global landscape",
+                title: "Trade Documents & Compliance",
+                desc: "Complete guide to must-have documents for smooth international shipments",
                 color: "from-emerald-900/20 to-emerald-950/10"
               },
               {
-                title: "Digital-First Trade",
-                desc: "Making international trade virtually easy and streamlined",
+                title: "Product Selection & Trends",
+                desc: "Identifying high-demand products and analyzing global supply trends",
                 color: "from-blue-900/20 to-blue-950/10"
               },
               {
-                title: "Selected Products & Markets",
-                desc: "Smart use of selected products to trade effectively in target countries",
+                title: "Branding & Packaging",
+                desc: "Elevating your brand presence and ensuring export-quality packaging standards",
                 color: "from-purple-900/20 to-purple-950/10"
               },
               {
-                title: "Advanced Logistics Tracking",
-                desc: "Comprehensive trade tracking and logistics management solutions",
+                title: "Logistics & Custom Process",
+                desc: "Strategic logistics planning and navigating complex custom procedures",
                 color: "from-amber-900/20 to-amber-950/10"
               }
             ].map((item, i) => (
@@ -432,15 +431,14 @@ Mobile: ${formData.mobile}`;
             className="text-center mb-10 lg:mb-20"
           >
             <div className="text-xs lg:text-sm tracking-widest uppercase text-emerald-400 mb-3 lg:mb-4">
-              Summit Experience
+              Workshop Experience
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif mb-4 lg:mb-6">
-              What This Summit Will Do For You
+              Why Join This Workshop?
             </h2>
             <p className="max-w-3xl mx-auto text-neutral-400 text-sm sm:text-base lg:text-lg">
-              A carefully curated, high-impact experience designed to give exporters,
-              importers, manufacturers and entrepreneurs clarity, confidence and a
-              future-ready trade mindset.
+              A transformative 5-day journey designed to give exporters and entrepreneurs 
+              the clarity, tools, and confidence to build a global business legacy.
             </p>
           </motion.div>
 
@@ -451,20 +449,20 @@ Mobile: ${formData.mobile}`;
             <div className="space-y-8 lg:space-y-12">
               {[
                 {
-                  title: "Paperless Customs & Digital Documentation",
-                  desc: "Transitioning to a fully electronic documentation system for faster processing and reduced errors."
+                  title: "End-to-End Export Roadmap",
+                  desc: "From finding the right product to receiving your final payment securely."
                 },
                 {
-                  title: "Technology-Driven Export & Import Solutions",
-                  desc: "Leveraging the latest software and platforms to manage your global trade operations effortlessly."
+                  title: "Expert Logistics Planning",
+                  desc: "Learning how to quote correctly and choose the best shipping routes."
                 },
                 {
-                  title: "Reducing Trade Costs",
-                  desc: "Insights on automation, compliance, and transparency to achieve faster clearances and lower operational expenses."
+                  title: "Market Intelligence",
+                  desc: "Tools and techniques to analyze demand-supply trends across target countries."
                 },
                 {
-                  title: "Future Trends in Global Trade",
-                  desc: "Exploring what's next for exports and imports in an increasingly connected and digital-first world."
+                  title: "Official Certification",
+                  desc: "Receive a recognized certification from New India Export upon successful completion."
                 }
               ].map((item, i) => (
                 <motion.div
@@ -508,7 +506,7 @@ Mobile: ${formData.mobile}`;
               viewport={{ once: true, margin: "-100px" }}
             >
               <div className="text-xs lg:text-sm tracking-widest uppercase text-emerald-400 mb-3 lg:mb-4">Session Type</div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif mb-6 lg:mb-10">World Trade Virtual Summit</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif mb-6 lg:mb-10">Virtual Shipment Workshop</h2>
 
               <div className="space-y-6 lg:space-y-8">
                 <div>
@@ -557,7 +555,7 @@ Mobile: ${formData.mobile}`;
                   <div className="text-emerald-400 text-5xl mb-6 flex justify-center">
                     <FaCalendarAlt />
                   </div>
-                  <h3 className="text-2xl font-serif mb-4">Virtual Summit Access</h3>
+                  <h3 className="text-2xl font-serif mb-4">Workshop Access</h3>
                   <p className="text-neutral-400 max-w-sm mx-auto">
                     This is a digital-first event. A secure meeting link will be emailed to you 24 hours before the session starts.
                   </p>
@@ -598,7 +596,7 @@ Mobile: ${formData.mobile}`;
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif mb-6 lg:mb-10 leading-tight">
               Secure Your Place at the
               <span className="block mt-2 lg:mt-4 bg-gradient-to-r from-neutral-100 via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
-                World Trade Virtual Summit
+                Virtual Shipment Workshop
               </span>
             </h2>
 
@@ -700,23 +698,23 @@ Mobile: ${formData.mobile}`;
 
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 lg:gap-6 justify-center mt-12">
               <a
-                href="/Blue and Black Modern Business Conference Flyer (2).pdf"
+                href="/new india (4).pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 lg:px-12 lg:py-6 rounded-full border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm flex items-center justify-center gap-2 lg:gap-3 hover:border-emerald-800/50 hover:bg-neutral-900/50 transition-all text-sm lg:text-lg"
               >
                 <FaDownload className="text-emerald-400 text-sm lg:text-base" />
-                <span>Conference Flyer</span>
+                <span>Workshop Flyer</span>
               </a>
 
               <a
-                href="/Brown White Modern Minimalist Furniture Bi-Fold Brochure (3).pdf"
+                href="/BrochureFinal.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 lg:px-12 lg:py-6 rounded-full border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm flex items-center justify-center gap-2 lg:gap-3 hover:border-emerald-800/50 hover:bg-neutral-900/50 transition-all text-sm lg:text-lg"
               >
                 <FaDownload className="text-emerald-400 text-sm lg:text-base" />
-                <span>World Trade Virtual Summit 2026</span>
+                <span>Workshop Brochure</span>
               </a>
             </div>
 
@@ -759,10 +757,10 @@ Mobile: ${formData.mobile}`;
                   Terms & Conditions
                 </h2>
                 <p className="text-lg lg:text-xl text-emerald-400 font-medium">
-                  World Trade Summit 2026
+                  Virtual Shipment Workshop
                 </p>
                 <p className="text-sm lg:text-base text-neutral-400 mt-4 max-w-3xl mx-auto leading-relaxed">
-                  These Terms and Conditions govern participation in World Trade Summit 2026, organized by New India Export.
+                  These Terms and Conditions govern participation in the Virtual Shipment Workshop, organized by New India Export.
                   By registering for the event, participants agree to comply with the following terms.
                 </p>
               </div>
@@ -776,9 +774,9 @@ Mobile: ${formData.mobile}`;
                     Event Details
                   </h3>
                   <div className="pl-11 space-y-2 text-neutral-300 leading-relaxed">
-                    <p><strong className="text-neutral-100">Event Name:</strong> World Trade Summit 2026</p>
+                    <p><strong className="text-neutral-100">Event Name:</strong> Virtual Shipment Workshop</p>
                     <p><strong className="text-neutral-100">Organizer:</strong> New India Export</p>
-                    <p><strong className="text-neutral-100">Date:</strong> 29 February 2026</p>
+                    <p><strong className="text-neutral-100">Date:</strong> 02 – 06 May 2026</p>
                     <p><strong className="text-neutral-100">Mode:</strong> Virtual Event</p>
                   </div>
                 </div>
