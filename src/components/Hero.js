@@ -3,11 +3,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import BookingModal from "./BookingModal";
+import EventBookingModal from "./EventBookingModal";
 import { FaCalendarAlt, FaMapMarkerAlt, FaChevronRight, FaStar } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Hero() {
   const [open, setOpen] = useState(false);
+  const [eventOpen, setEventOpen] = useState(false);
 
   return (
     <>
@@ -172,13 +174,20 @@ export default function Hero() {
                     <FaChevronRight className="relative z-10 text-xs transition-transform group-hover:translate-x-1" />
                   </Link>
 
-                  <a
-                    href="https://wa.me/919028894149"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => setEventOpen(true)}
                     className="group px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3 rounded-full border border-emerald-800/50 bg-emerald-900/20 text-emerald-300 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 hover:border-emerald-700/50 hover:bg-emerald-900/30 transition-all"
                   >
                     <span>Reserve Your Seat</span>
+                  </button>
+
+                  <a
+                    href="/brochure/NIE X VIRTUAL SHIPMENT WORKSHOP (5 DAYS) BROCHURE.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 text-neutral-400 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all"
+                  >
+                    <span>Workshop Brochure</span>
                   </a>
                 </div>
               </div>
@@ -198,6 +207,7 @@ export default function Hero() {
 
       {/* BOOKING MODAL */}
       <BookingModal open={open} setOpen={setOpen} />
+      <EventBookingModal open={eventOpen} setOpen={setEventOpen} />
     </>
   );
 }

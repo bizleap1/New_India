@@ -36,13 +36,75 @@ export default function EventPage() {
       return;
     }
 
-    const message = `Hello, I would like to reserve my seat for the Virtual Shipment Workshop (5 Days).
-Name: ${formData.name}
-Email: ${formData.email}
-Mobile: ${formData.mobile}`;
+    try {
+      // 1. Create Razorpay Order in Backend
+      const orderRes = await fetch("http://localhost:5001/api/payment/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: 6399, // Workshop price
+          customerDetails: {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.mobile,
+          },
+          bookingDetails: {
+            category: "Workshop",
+            subProducts: "Virtual Shipment Workshop (5 Days)",
+          }
+        }),
+      });
 
-    const whatsappUrl = `https://wa.me/919028894149?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+      const orderData = await orderRes.json();
+      if (!orderData.success) throw new Error("Order creation failed");
+
+      // 2. Open Razorpay Checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use environment variable
+        amount: orderData.order.amount,
+        currency: orderData.order.currency,
+        name: "New India Export",
+        description: "Virtual Shipment Workshop (5 Days)",
+        order_id: orderData.order.id,
+        handler: async function (response) {
+          // 3. Verify Payment in Backend
+          const verifyRes = await fetch("http://localhost:5001/api/payment/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+
+          const verifyData = await verifyRes.json();
+          if (verifyData.success) {
+            alert("Payment Successful! Your seat has been reserved. You will receive a confirmation email shortly.");
+            // Reset form
+            setFormData({ name: "", email: "", mobile: "" });
+            setTermsAccepted(false);
+          } else {
+            alert("Payment verification failed. Please contact support.");
+          }
+        },
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.mobile,
+        },
+        theme: {
+          color: "#10b981", // Emerald color
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong during payment initiation.");
+    }
   };
 
   const handleRegisterClick = () => {
@@ -169,15 +231,13 @@ Mobile: ${formData.mobile}`;
               transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row flex-wrap gap-4"
             >
-              <a
-                href="https://wa.me/919028894149"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={handleRegisterClick}
                 className="group px-6 py-4 lg:px-10 lg:py-5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all cursor-pointer"
               >
                 Reserve Your Seat
                 <FaChevronRight className="transition-transform group-hover:translate-x-1" />
-              </a>
+              </button>
 
               <a
                 href="/new india (4).pdf"
@@ -196,7 +256,17 @@ Mobile: ${formData.mobile}`;
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
               >
                 <FaDownload className="text-emerald-400" />
-                Workshop Brochure
+                Workshop Brochure (Old)
+              </a>
+
+              <a
+                href="/brochure/NIE X VIRTUAL SHIPMENT WORKSHOP (5 DAYS) BROCHURE.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
+              >
+                <FaDownload className="text-emerald-400" />
+                Workshop Brochure (New)
               </a>
             </motion.div>
 
@@ -685,12 +755,12 @@ Mobile: ${formData.mobile}`;
                     disabled={!termsAccepted}
                     className="w-full group relative px-8 py-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-bold text-lg flex items-center justify-center gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Reserve Now via WhatsApp
+                    Reserve Seat (₹6399)
                     <FaChevronRight className="transition-transform group-hover:translate-x-1" />
                   </button>
                   <p className="text-xs text-neutral-500 mt-4 flex items-center justify-center gap-2 text-center w-full">
                     <FiCheckCircle className="text-emerald-400" />
-                    Reservation handled via WhatsApp Business
+                    Secure Payment via Razorpay
                   </p>
                 </div>
               </form>
@@ -714,7 +784,17 @@ Mobile: ${formData.mobile}`;
                 className="px-8 py-4 lg:px-12 lg:py-6 rounded-full border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm flex items-center justify-center gap-2 lg:gap-3 hover:border-emerald-800/50 hover:bg-neutral-900/50 transition-all text-sm lg:text-lg"
               >
                 <FaDownload className="text-emerald-400 text-sm lg:text-base" />
-                <span>Workshop Brochure</span>
+                <span>Old Brochure</span>
+              </a>
+
+              <a
+                href="/brochure/NIE X VIRTUAL SHIPMENT WORKSHOP (5 DAYS) BROCHURE.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 lg:px-12 lg:py-6 rounded-full border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm flex items-center justify-center gap-2 lg:gap-3 hover:border-emerald-800/50 hover:bg-neutral-900/50 transition-all text-sm lg:text-lg"
+              >
+                <FaDownload className="text-emerald-400 text-sm lg:text-base" />
+                <span>New Brochure</span>
               </a>
             </div>
 

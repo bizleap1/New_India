@@ -21,8 +21,8 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch(err => console.error('MongoDB Connection Error:', err));
 
 // Routes
-
-
+const paymentRoutes = require('./routes/paymentRoutes');
+app.use('/api/payment', paymentRoutes);
 // Health Check
 app.get('/', (req, res) => {
     res.json({ status: 'New India Export Backend Running' });

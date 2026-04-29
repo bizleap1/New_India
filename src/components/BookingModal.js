@@ -51,46 +51,115 @@ export default function BookingModal({ open, setOpen }) {
   const send = async () => {
     setIsSubmitting(true);
 
-    const payload = {
-      access_key: "5dfb3e12-4f27-417a-81d2-c2021ffd842b",
-      shipment: form.shipment,
-      category: form.category,
-      subProducts: form.subProducts.join(", "),
-      quantity: form.quantity,
-      name: form.name,
-      phone: form.phone,
-      email: form.email,
-      country: form.country,
-      address: form.address,
-      subject: `New Booking Request - ${form.category}`,
-    };
-
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      // 1. Create Razorpay Order in Backend
+      const orderRes = await fetch("http://localhost:5001/api/payment/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          amount: 1, // Example: 1 INR
+          customerDetails: {
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            address: form.address,
+            country: form.country,
+          },
+          bookingDetails: {
+            shipment: form.shipment,
+            category: form.category,
+            subProducts: form.subProducts.join(", "),
+            quantity: form.quantity,
+          }
+        }),
       });
 
-      const data = await res.json();
-      if (data.success) {
-        alert("Request sent!");
-        setOpen(false);
-        setStep(0);
-        setForm({
-          shipment: "",
-          category: "",
-          subProducts: [],
-          quantity: "",
-          name: "",
-          phone: "",
-          email: "",
-          address: "",
-          country: "",
-        });
-      } else alert("Error, try again.");
+      const orderData = await orderRes.json();
+      if (!orderData.success) throw new Error("Order creation failed");
+
+      // 2. Open Razorpay Checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use environment variable
+        amount: orderData.order.amount,
+        currency: orderData.order.currency,
+        name: "New India Export",
+        description: `Booking for ${form.category}`,
+        order_id: orderData.order.id,
+        handler: async function (response) {
+          // 3. Verify Payment in Backend
+          const verifyRes = await fetch("http://localhost:5001/api/payment/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+
+          const verifyData = await verifyRes.json();
+          if (verifyData.success) {
+            // 4. Submit to Web3Forms after payment success
+            const payload = {
+              access_key: "5dfb3e12-4f27-417a-81d2-c2021ffd842b",
+              shipment: form.shipment,
+              category: form.category,
+              subProducts: form.subProducts.join(", "),
+              quantity: form.quantity,
+              name: form.name,
+              phone: form.phone,
+              email: form.email,
+              country: form.country,
+              address: form.address,
+              subject: `PAID Booking Request - ${form.category}`,
+              razorpay_payment_id: response.razorpay_payment_id
+            };
+
+            const web3Res = await fetch("https://api.web3forms.com/submit", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            const web3Data = await web3Res.json();
+            if (web3Data.success) {
+              alert("Payment Successful & Request Sent!");
+              setOpen(false);
+              setStep(0);
+              setForm({
+                shipment: "",
+                category: "",
+                subProducts: [],
+                quantity: "",
+                name: "",
+                phone: "",
+                email: "",
+                address: "",
+                country: "",
+              });
+            } else {
+              alert("Payment Success but Email Notification failed. Please contact support.");
+            }
+          } else {
+            alert("Payment verification failed. Please contact support.");
+          }
+        },
+        prefill: {
+          name: form.name,
+          email: form.email,
+          contact: form.phone,
+        },
+        theme: {
+          color: "#000000",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+
     } catch (e) {
-      alert("Network issue!");
+      console.error(e);
+      alert("Something went wrong during payment initiation.");
     } finally {
       setIsSubmitting(false);
     }

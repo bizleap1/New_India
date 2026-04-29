@@ -70,6 +70,11 @@ export default function Navbar() {
       name: "Workshop Brochure",
       path: "/BrochureFinal.pdf",
       type: "download"
+    },
+    {
+      name: "NIE X Virtual Workshop Brochure",
+      path: "/brochure/NIE X VIRTUAL SHIPMENT WORKSHOP (5 DAYS) BROCHURE.pdf",
+      type: "download"
     }
   ];
 
