@@ -10,12 +10,16 @@ const razorpay = new Razorpay({
 
 exports.createOrder = async (req, res) => {
     try {
-        const { amount, currency, customerDetails, bookingDetails } = req.body;
+        const { amount, currency, customerDetails, bookingDetails, receipt } = req.body;
+
+        if (!amount || amount < 100) {
+            return res.status(400).json({ success: false, message: 'Minimum amount must be 100 paise' });
+        }
 
         const options = {
-            amount: amount * 100, // amount in the smallest currency unit (paise for INR)
+            amount: amount, // amount in paise
             currency: currency || 'INR',
-            receipt: `receipt_${Date.now()}`
+            receipt: receipt || `receipt_${Date.now()}`
         };
 
         const razorpayOrder = await razorpay.orders.create(options);
@@ -41,6 +45,15 @@ exports.createOrder = async (req, res) => {
         });
     } catch (error) {
         console.error('Error creating Razorpay order:', error);
+        
+        // Handle auth failures
+        if (error.statusCode === 401) {
+            return res.status(401).json({
+                success: false,
+                message: 'Authentication failed. Please check your Razorpay keys.'
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: 'Failed to create order',
@@ -52,6 +65,10 @@ exports.createOrder = async (req, res) => {
 exports.verifyPayment = async (req, res) => {
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
+        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+            return res.status(400).json({ success: false, message: 'Missing required payment fields' });
+        }
 
         const body = razorpay_order_id + "|" + razorpay_payment_id;
 

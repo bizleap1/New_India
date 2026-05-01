@@ -57,7 +57,7 @@ export default function BookingModal({ open, setOpen }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: 1, // Example: 1 INR
+          amount: 100, // 1 INR in paise
           customerDetails: {
             name: form.name,
             email: form.email,
@@ -152,9 +152,19 @@ export default function BookingModal({ open, setOpen }) {
         theme: {
           color: "#000000",
         },
+        modal: {
+          ondismiss: function() {
+            alert("Payment cancelled.");
+            setIsSubmitting(false);
+          }
+        }
       };
 
       const rzp = new window.Razorpay(options);
+      rzp.on('payment.failed', function (response){
+        alert("Payment failed: " + response.error.description);
+        setIsSubmitting(false);
+      });
       rzp.open();
 
     } catch (e) {

@@ -31,7 +31,7 @@ export default function EventBookingModal({ open, setOpen }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: 6399, // Workshop price
+          amount: 639900, // Workshop price in paise
           customerDetails: {
             name: formData.name,
             email: formData.email,
@@ -84,9 +84,19 @@ export default function EventBookingModal({ open, setOpen }) {
         theme: {
           color: "#10b981",
         },
+        modal: {
+          ondismiss: function() {
+            alert("Payment cancelled.");
+            setIsSubmitting(false);
+          }
+        }
       };
 
       const rzp = new window.Razorpay(options);
+      rzp.on('payment.failed', function (response) {
+        alert("Payment failed: " + response.error.description);
+        setIsSubmitting(false);
+      });
       rzp.open();
 
     } catch (error) {
