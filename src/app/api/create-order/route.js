@@ -3,9 +3,12 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { amount } = await req.json();
+    const body = await req.json();
+    console.log("Create order request body:", body);
+    const { amount } = body;
 
     if (!amount || amount < 100) {
+      console.error("Invalid amount:", amount);
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
 
@@ -20,13 +23,15 @@ export async function POST(req) {
       receipt: `receipt_${Date.now()}`,
     };
 
+    console.log("Creating Razorpay order with options:", options);
     const order = await razorpay.orders.create(options);
+    console.log("Razorpay order created:", order.id);
 
     return NextResponse.json(order);
   } catch (err) {
-    console.error("Create order error:", err?.message || err);
+    console.error("Create order error detailed:", err);
     return NextResponse.json(
-      { error: "Order creation failed", detail: err?.message },
+      { error: "Order creation failed", detail: err?.message || String(err) },
       { status: 500 }
     );
   }
