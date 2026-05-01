@@ -1,8 +1,22 @@
 "use client";
 
 export default function PayButton() {
+  const loadRazorpayScript = () =>
+    new Promise((resolve) => {
+      if (window.Razorpay) return resolve(true);
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+
   const handlePayment = async () => {
     try {
+      // 0. Ensure Razorpay script is loaded
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) throw new Error("Failed to load Razorpay SDK");
+
       // 1. Create order via Next.js API route
       const res = await fetch("/api/create-order", {
         method: "POST",
@@ -12,56 +26,45 @@ export default function PayButton() {
 
       const order = await res.json();
 
-      if (!order.id) throw new Error("Order creation failed");
+      if (!order.id) throw new Error(order.detail || order.error || "Order creation failed");
 
-      // 2. Load Razorpay script dynamically
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.async = true;
-      document.body.appendChild(script);
+      // 2. Open Razorpay Checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: "INR",
+        name: "New India Export",
+        description: "Standard Checkout",
+        order_id: order.id,
 
-      script.onload = () => {
-        const options = {
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-          amount: order.amount,
-          currency: "INR",
-          order_id: order.id,
+        handler: async function (response) {
+          // 3. Verify payment via Next.js API route
+          const verifyRes = await fetch("/api/verify-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(response),
+          });
 
-          handler: async function (response) {
-            // 3. Verify payment via Next.js API route
-            const verifyRes = await fetch("/api/verify-payment", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(response),
-            });
+          const result = await verifyRes.json();
 
-            const result = await verifyRes.json();
-
-            if (result.success) {
-              alert("Payment successful!");
-            } else {
-              alert("Payment verification failed");
-            }
-          },
-
-          modal: {
-            ondismiss: function () {
-              alert("Payment cancelled.");
-            },
-          },
-        };
-
-        const rzp = new window.Razorpay(options);
-
-        rzp.on("payment.failed", function (response) {
-          alert("Payment failed: " + response.error.description);
-        });
-
-        rzp.open();
+          if (result.success) {
+            alert("Payment successful!");
+          } else {
+            alert("Payment verification failed");
+          }
+        },
       };
+
+      const rzp = new window.Razorpay(options);
+
+      rzp.on("payment.failed", function (response) {
+        alert("Payment failed: " + response.error.description);
+      });
+
+      rzp.open();
     } catch (err) {
-      console.error(err);
-      alert("Something went wrong during payment initiation.");
+      console.error("Payment initiation error:", err);
+      alert("Payment error: " + (err.message || "Something went wrong."));
     }
   };
 
