@@ -16,9 +16,11 @@ export async function POST(req) {
     const key_secret = process.env.RAZORPAY_KEY_SECRET;
 
     if (!key_id || !key_secret) {
-      console.error("Missing Razorpay credentials in .env");
+      console.error("Missing Razorpay credentials. key_id:", !!key_id, "key_secret:", !!key_secret);
       throw new Error("Razorpay Key ID or Secret is missing in root .env");
     }
+
+    console.log("Using Razorpay Key:", key_id.substring(0, 8) + "...");
 
     const razorpay = new Razorpay({
       key_id: key_id,
@@ -33,13 +35,16 @@ export async function POST(req) {
 
     console.log("Creating Razorpay order with options:", options);
     const order = await razorpay.orders.create(options);
-    console.log("Razorpay order created:", order.id);
+    console.log("Razorpay order created successfully:", order.id);
 
     return NextResponse.json(order);
   } catch (err) {
-    console.error("Create order error detailed:", err);
+    console.error("Create order failure full error:", err);
     return NextResponse.json(
-      { error: "Order creation failed", detail: err?.message || String(err) },
+      { 
+        error: "Order creation failed", 
+        detail: err?.error?.description || err?.message || String(err) 
+      },
       { status: 500 }
     );
   }
