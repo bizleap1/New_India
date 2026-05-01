@@ -25,11 +25,10 @@ export default function EventBookingModal({ open, setOpen }) {
     }
 
     setIsSubmitting(true);
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     try {
-      // 1. Create Razorpay Order in Backend
-      const orderRes = await fetch(`${API_URL}/api/payment/create-order`, {
+      // 1. Create Razorpay Order via Next.js API route
+      const orderRes = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,20 +45,20 @@ export default function EventBookingModal({ open, setOpen }) {
         }),
       });
 
-      const orderData = await orderRes.json();
-      if (!orderData.success) throw new Error("Order creation failed");
+      const order = await orderRes.json();
+      if (!order.id) throw new Error("Order creation failed");
 
       // 2. Open Razorpay Checkout
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: orderData.order.amount,
-        currency: orderData.order.currency,
+        amount: order.amount,
+        currency: order.currency,
         name: "New India Export",
         description: "Virtual Shipment Workshop (5 Days)",
-        order_id: orderData.order.id,
+        order_id: order.id,
         handler: async function (response) {
-          // 3. Verify Payment in Backend
-          const verifyRes = await fetch(`${API_URL}/api/payment/verify`, {
+          // 3. Verify Payment via Next.js API route
+          const verifyRes = await fetch("/api/verify-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
