@@ -64,7 +64,7 @@ export default function EventBookingModal({ open, setOpen }) {
 
       // 2. Open Razorpay Checkout
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_Sk6wplrNSRrt1d",
         amount: order.amount,
         currency: order.currency,
         name: "New India Export",

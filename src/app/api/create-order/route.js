@@ -12,8 +12,9 @@ export async function POST(req) {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
 
-    const key_id = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-    const key_secret = process.env.RAZORPAY_KEY_SECRET;
+    // Fallback to provided live keys if env is missing due to root inference issues
+    const key_id = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_Sk6wplrNSRrt1d";
+    const key_secret = process.env.RAZORPAY_KEY_SECRET || "tUDNN5E8z4OBS4OH2qKX7ZMR";
 
     if (!key_id || !key_secret) {
       console.error("Missing Razorpay credentials. key_id:", !!key_id, "key_secret:", !!key_secret);
