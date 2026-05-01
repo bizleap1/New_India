@@ -3,10 +3,16 @@ const crypto = require('crypto');
 const Order = require('../models/Order');
 const Payment = require('../models/Payment');
 
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID || 'YOUR_KEY_ID',
-    key_secret: process.env.RAZORPAY_KEY_SECRET || 'YOUR_KEY_SECRET'
-});
+const getRazorpayInstance = () => {
+    const key_id = process.env.RAZORPAY_KEY_ID;
+    const key_secret = process.env.RAZORPAY_KEY_SECRET;
+
+    if (!key_id || !key_secret || key_id === 'YOUR_KEY_ID') {
+        throw new Error('Razorpay Key ID or Secret is missing in backend/.env');
+    }
+
+    return new Razorpay({ key_id, key_secret });
+};
 
 exports.createOrder = async (req, res) => {
     try {
@@ -22,6 +28,7 @@ exports.createOrder = async (req, res) => {
             receipt: receipt || `receipt_${Date.now()}`
         };
 
+        const razorpay = getRazorpayInstance();
         const razorpayOrder = await razorpay.orders.create(options);
 
         // Save order to our database (Optional for testing Razorpay initiation)
@@ -45,7 +52,7 @@ exports.createOrder = async (req, res) => {
         });
     } catch (error) {
         console.error('Error creating Razorpay order:', error);
-        
+
         // Handle auth failures
         if (error.statusCode === 401) {
             return res.status(401).json({
