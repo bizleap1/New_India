@@ -17,6 +17,16 @@ export default function EventBookingModal({ open, setOpen }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const loadRazorpayScript = () =>
+    new Promise((resolve) => {
+      if (window.Razorpay) return resolve(true);
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+
   const handlePayment = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.mobile) {
@@ -27,6 +37,10 @@ export default function EventBookingModal({ open, setOpen }) {
     setIsSubmitting(true);
 
     try {
+      // 0. Ensure Razorpay script is loaded
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) throw new Error("Failed to load Razorpay SDK");
+
       // 1. Create Razorpay Order via Next.js API route
       const orderRes = await fetch("/api/create-order", {
         method: "POST",
@@ -46,7 +60,7 @@ export default function EventBookingModal({ open, setOpen }) {
       });
 
       const order = await orderRes.json();
-      if (!order.id) throw new Error("Order creation failed");
+      if (!order.id) throw new Error(order.detail || order.error || "Order creation failed");
 
       // 2. Open Razorpay Checkout
       const options = {
@@ -85,12 +99,6 @@ export default function EventBookingModal({ open, setOpen }) {
         theme: {
           color: "#10b981",
         },
-        modal: {
-          ondismiss: function() {
-            alert("Payment cancelled.");
-            setIsSubmitting(false);
-          }
-        }
       };
 
       const rzp = new window.Razorpay(options);
@@ -101,8 +109,8 @@ export default function EventBookingModal({ open, setOpen }) {
       rzp.open();
 
     } catch (error) {
-      console.error(error);
-      alert("Something went wrong during payment initiation.");
+      console.error("Payment error:", error);
+      alert("Payment error: " + (error.message || "Something went wrong."));
     } finally {
       setIsSubmitting(false);
     }

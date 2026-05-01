@@ -48,10 +48,24 @@ export default function BookingModal({ open, setOpen }) {
     Others: ["Custom Items"],
   };
 
+  const loadRazorpayScript = () =>
+    new Promise((resolve) => {
+      if (window.Razorpay) return resolve(true);
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+
   const send = async () => {
     setIsSubmitting(true);
 
     try {
+      // 0. Ensure Razorpay script is loaded
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) throw new Error("Failed to load Razorpay SDK");
+
       // 1. Create Razorpay Order via Next.js API route
       const orderRes = await fetch("/api/create-order", {
         method: "POST",
@@ -75,7 +89,7 @@ export default function BookingModal({ open, setOpen }) {
       });
 
       const order = await orderRes.json();
-      if (!order.id) throw new Error("Order creation failed");
+      if (!order.id) throw new Error(order.detail || order.error || "Order creation failed");
 
       // 2. Open Razorpay Checkout
       const options = {
@@ -152,12 +166,6 @@ export default function BookingModal({ open, setOpen }) {
         theme: {
           color: "#000000",
         },
-        modal: {
-          ondismiss: function() {
-            alert("Payment cancelled.");
-            setIsSubmitting(false);
-          }
-        }
       };
 
       const rzp = new window.Razorpay(options);
@@ -168,8 +176,8 @@ export default function BookingModal({ open, setOpen }) {
       rzp.open();
 
     } catch (e) {
-      console.error(e);
-      alert("Something went wrong during payment initiation.");
+      console.error("Payment error:", e);
+      alert("Payment error: " + (e.message || "Something went wrong."));
     } finally {
       setIsSubmitting(false);
     }
