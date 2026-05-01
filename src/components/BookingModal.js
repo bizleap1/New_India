@@ -50,10 +50,11 @@ export default function BookingModal({ open, setOpen }) {
 
   const send = async () => {
     setIsSubmitting(true);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     try {
       // 1. Create Razorpay Order in Backend
-      const orderRes = await fetch("http://localhost:5001/api/payment/create-order", {
+      const orderRes = await fetch(`${API_URL}/api/payment/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -87,7 +88,7 @@ export default function BookingModal({ open, setOpen }) {
         order_id: orderData.order.id,
         handler: async function (response) {
           // 3. Verify Payment in Backend
-          const verifyRes = await fetch("http://localhost:5001/api/payment/verify", {
+          const verifyRes = await fetch(`${API_URL}/api/payment/verify`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
