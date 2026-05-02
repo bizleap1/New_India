@@ -11,8 +11,10 @@ export async function POST(req) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
+    const key_secret = process.env.RAZORPAY_KEY_SECRET || "tUDNN5E8z4OBS4OH2qKX7ZMR";
+
     const generated_signature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .createHmac("sha256", key_secret)
       .update(`${razorpay_order_id}|${razorpay_payment_id}`)
       .digest("hex");
 

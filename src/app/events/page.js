@@ -25,6 +25,16 @@ export default function EventPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const loadRazorpayScript = () =>
+    new Promise((resolve) => {
+      if (window.Razorpay) return resolve(true);
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+
   const handlePayment = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.mobile) {
@@ -37,12 +47,16 @@ export default function EventPage() {
     }
 
     try {
-      // 1. Create Razorpay Order in Backend
-      const orderRes = await fetch("http://localhost:5001/api/payment/create-order", {
+      // 0. Ensure Razorpay script is loaded
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) throw new Error("Failed to load Razorpay SDK");
+
+      // 1. Create Razorpay Order via Next.js API route
+      const orderRes = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: 6399, // Workshop price
+          amount: 639900, // Workshop price in paise (₹6399.00)
           customerDetails: {
             name: formData.name,
             email: formData.email,
@@ -56,19 +70,19 @@ export default function EventPage() {
       });
 
       const orderData = await orderRes.json();
-      if (!orderData.success) throw new Error("Order creation failed");
+      if (!orderData.id) throw new Error(orderData.detail || orderData.error || "Order creation failed");
 
       // 2. Open Razorpay Checkout
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use environment variable
-        amount: orderData.order.amount,
-        currency: orderData.order.currency,
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_Sk6wplrNSRrt1d",
+        amount: orderData.amount,
+        currency: orderData.currency,
         name: "New India Export",
         description: "Virtual Shipment Workshop (5 Days)",
-        order_id: orderData.order.id,
+        order_id: orderData.id,
         handler: async function (response) {
-          // 3. Verify Payment in Backend
-          const verifyRes = await fetch("http://localhost:5001/api/payment/verify", {
+          // 3. Verify Payment via Next.js API route
+          const verifyRes = await fetch("/api/verify-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -99,11 +113,14 @@ export default function EventPage() {
       };
 
       const rzp = new window.Razorpay(options);
+      rzp.on('payment.failed', function (response){
+        alert("Payment failed: " + response.error.description);
+      });
       rzp.open();
 
     } catch (error) {
       console.error(error);
-      alert("Something went wrong during payment initiation.");
+      alert("Something went wrong during payment initiation: " + (error.message || ""));
     }
   };
 
