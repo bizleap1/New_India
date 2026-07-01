@@ -55,7 +55,8 @@ export default function Footer() {
         </div>
 
         <div className="text-center mt-10 text-sm opacity-90" suppressHydrationWarning>
-          © {new Date().getFullYear()} New India Export. All rights reserved.
+          <p>© {new Date().getFullYear()} New India Export. All rights reserved.</p>
+          <p className="mt-2">Developed and Manageed by <a href="https://bizleap.in/" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">BIZLEAP</a></p>
         </div>
       </footer>
 
