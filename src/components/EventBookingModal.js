@@ -12,6 +12,7 @@ export default function EventBookingModal({ open, setOpen }) {
     email: "",
     mobile: ""
   });
+  const [agreed, setAgreed] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -87,6 +88,7 @@ export default function EventBookingModal({ open, setOpen }) {
             alert("Payment Successful! Your seat has been reserved.");
             setOpen(false);
             setFormData({ name: "", email: "", mobile: "" });
+            setAgreed(false);
           } else {
             alert("Payment verification failed. Please contact support.");
           }
@@ -125,7 +127,7 @@ export default function EventBookingModal({ open, setOpen }) {
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-3xl shadow-2xl overflow-hidden"
+          className="relative w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
         >
           <button
             onClick={() => setOpen(false)}
@@ -176,11 +178,42 @@ export default function EventBookingModal({ open, setOpen }) {
                 />
               </div>
 
-              <div className="pt-4">
+              <div className="border-t border-neutral-800 pt-5 mt-2">
+                <h3 className="text-sm font-serif text-white mb-2">Terms & Conditions</h3>
+                <div className="text-xs text-neutral-400 space-y-2 h-32 overflow-y-auto pr-2">
+                  <p>1. Registration will be confirmed only after successful payment.</p>
+                  <p>2. Once the payment is made, it is non-refundable and non-transferable.</p>
+                  <p>3. Participants must follow all programme rules, instructions, and schedules announced by the organizers.</p>
+                  <p>4. Late entry may not be permitted after the programme has started.</p>
+                  <p>5. Any abusive language, misconduct, violence, or inappropriate behaviour is strictly prohibited.</p>
+                  <p>6. New India Export reserves the right to remove any participant violating the programme rules and may take appropriate action if required.</p>
+                  <p>7. The organizer reserves the right to make changes to the programme schedule if necessary.</p>
+                </div>
+                
+                <h3 className="text-sm font-serif text-white mt-4 mb-2">Declaration</h3>
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <div className="relative flex items-center justify-center mt-0.5 shrink-0">
+                    <input 
+                      type="checkbox" 
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                      className="peer appearance-none w-4 h-4 rounded bg-black border border-neutral-700 checked:bg-emerald-500 checked:border-emerald-500 transition-colors"
+                    />
+                    <svg className="absolute text-black w-3 h-3 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-xs text-neutral-400 group-hover:text-neutral-300 transition-colors leading-relaxed">
+                    I have read and understood the Terms & Conditions and agree to abide by them.
+                  </span>
+                </label>
+              </div>
+
+              <div className="pt-2">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full group relative px-8 py-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-bold text-lg flex items-center justify-center gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all disabled:opacity-50"
+                  disabled={isSubmitting || !agreed}
+                  className="w-full group relative px-8 py-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-bold text-lg flex items-center justify-center gap-3 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Processing..." : "Pay ₹1,499"}
                   <FaChevronRight className="transition-transform group-hover:translate-x-1" />
