@@ -85,7 +85,18 @@ export default function EventBookingModal({ open, setOpen }) {
 
           const verifyData = await verifyRes.json();
           if (verifyData.success) {
-            alert("Payment Successful! Your seat has been reserved.");
+            // Send email
+            await fetch("/api/send-email", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: formData.name,
+                email: formData.email,
+                mobile: formData.mobile,
+              }),
+            });
+
+            alert("Thank you for registering! Your registration has been received successfully. Our team will contact you shortly.");
             setOpen(false);
             setFormData({ name: "", email: "", mobile: "" });
             setAgreed(false);
