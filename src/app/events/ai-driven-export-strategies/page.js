@@ -88,7 +88,7 @@ export default function AIDrivenExportStrategiesPage() {
               </button>
 
               <a
-                href="/Brochure26july (1).pdf"
+                href="/Brochure26july.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
@@ -98,13 +98,23 @@ export default function AIDrivenExportStrategiesPage() {
               </a>
 
               <a
-                href="/EVENT26FLYER (1).pdf"
+                href="/EVENT26FLYER.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
               >
                 <FaDownload className="text-emerald-400" />
                 Download Event Flyer
+              </a>
+
+              <a
+                href="/REGISTRATION FORM.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
+              >
+                <FaDownload className="text-emerald-400" />
+                Offline Registration Form
               </a>
             </motion.div>
 
@@ -283,13 +293,22 @@ export default function AIDrivenExportStrategiesPage() {
             <FaChevronRight />
           </button>
           <a
-            href="/Brochure26july (1).pdf"
+            href="/Brochure26july.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="px-10 py-5 rounded-full border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-900 hover:border-emerald-800/50 transition-all flex items-center justify-center gap-3 text-lg"
           >
             <FaDownload className="text-emerald-400" />
             Download Brochure
+          </a>
+          <a
+            href="/REGISTRATION FORM.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-10 py-5 rounded-full border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-900 hover:border-emerald-800/50 transition-all flex items-center justify-center gap-3 text-lg"
+          >
+            <FaDownload className="text-emerald-400" />
+            Offline Form
           </a>
         </div>
       </section>

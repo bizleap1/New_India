@@ -162,28 +162,38 @@ export default function Hero() {
 
 
                 {/* Action Buttons - Reduced padding for mobile */}
-                <div className="flex flex-col sm:flex-row gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   <Link
                     href="/events/ai-driven-export-strategies"
-                    className="group px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium text-xs sm:text-sm flex items-center justify-center gap-2 overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/25"
+                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium text-xs sm:text-sm flex items-center justify-center gap-2 overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/25"
                   >
-                    <span className="relative z-10">View Event Details</span>
-                    <FaChevronRight className="relative z-10 text-xs transition-transform group-hover:translate-x-1" />
+                    <span className="relative z-10 text-center">View Details</span>
+                    <FaChevronRight className="relative z-10 text-xs transition-transform group-hover:translate-x-1 shrink-0" />
                   </Link>
 
                   <button
                     onClick={() => setEventOpen(true)}
-                    className="group px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3 rounded-full border border-emerald-800/50 bg-emerald-900/20 text-emerald-300 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 hover:border-emerald-700/50 hover:bg-emerald-900/30 transition-all"
+                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-emerald-800/50 bg-emerald-900/20 text-emerald-300 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 hover:border-emerald-700/50 hover:bg-emerald-900/30 transition-all"
                   >
-                    <span>Register Now</span>
+                    <span className="text-center">Register Now</span>
                   </button>
 
                   <a
-                    href="/Brochure26july (1).pdf"
+                    href="/Brochure26july.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 sm:px-6 sm:py-3 lg:px-8 lg:py-4 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all w-full sm:w-auto text-xs sm:text-sm lg:text-base font-medium"
-                  >  <span>Download Brochure</span>
+                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium"
+                  >
+                    <span className="text-center">Brochure</span>
+                  </a>
+
+                  <a
+                    href="/REGISTRATION FORM.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium"
+                  >
+                    <span className="text-center">Offline Form</span>
                   </a>
                 </div>
               </div>
