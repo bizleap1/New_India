@@ -51,7 +51,7 @@ export default function AIDrivenExportStrategiesPage() {
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
               {[
                 { icon: <FaCalendarAlt />, label: "26 July 2026", sub: "Sunday" },
-                { icon: <FaClock />, label: "6:00 PM", sub: "Evening Session" },
+                { icon: <FaClock />, label: "3:00 PM - 9:00 PM", sub: "Followed by Dinner" },
                 { icon: <FaMapMarkerAlt />, label: "Tuli Imperial", sub: "Nagpur, Maharashtra" }
               ].map((item, i) => (
                 <motion.div
@@ -88,7 +88,7 @@ export default function AIDrivenExportStrategiesPage() {
               </button>
 
               <a
-                href="/Brochure26july.pdf"
+                href="/Brochure26july-ENG.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
@@ -98,7 +98,7 @@ export default function AIDrivenExportStrategiesPage() {
               </a>
 
               <a
-                href="/EVENT26FLYER.pdf"
+                href="/EVENT26FLYER-ENG.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
@@ -108,7 +108,7 @@ export default function AIDrivenExportStrategiesPage() {
               </a>
 
               <a
-                href="/REGISTRATION FORM.pdf"
+                href="/REGESTRATIONFORM-ENG.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-3 hover:border-emerald-800/50 transition-all"
@@ -293,7 +293,7 @@ export default function AIDrivenExportStrategiesPage() {
             <FaChevronRight />
           </button>
           <a
-            href="/Brochure26july.pdf"
+            href="/Brochure26july-ENG.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="px-10 py-5 rounded-full border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-900 hover:border-emerald-800/50 transition-all flex items-center justify-center gap-3 text-lg"
@@ -302,7 +302,7 @@ export default function AIDrivenExportStrategiesPage() {
             Download Brochure
           </a>
           <a
-            href="/REGISTRATION FORM.pdf"
+            href="/REGESTRATIONFORM-ENG.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="px-10 py-5 rounded-full border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-900 hover:border-emerald-800/50 transition-all flex items-center justify-center gap-3 text-lg"

@@ -63,17 +63,17 @@ export default function Navbar() {
   const brochures = [
     {
       name: "Download Event Flyer",
-      path: "/EVENT26FLYER.pdf",
+      path: "/EVENT26FLYER-ENG.pdf",
       type: "download"
     },
     {
       name: "Download Brochure",
-      path: "/Brochure26july.pdf",
+      path: "/Brochure26july-ENG.pdf",
       type: "download"
     },
     {
       name: "Offline Registration Form",
-      path: "/REGISTRATION FORM.pdf",
+      path: "/REGESTRATIONFORM-ENG.pdf",
       type: "download"
     }
   ];

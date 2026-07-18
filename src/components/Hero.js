@@ -131,7 +131,7 @@ export default function Hero() {
                     </div>
                     <div>
                       <div className="font-medium text-white text-xs sm:text-sm lg:text-base">26 July 2026</div>
-                      <div className="text-xs text-neutral-400">6:00 PM</div>
+                      <div className="text-xs text-neutral-400">3:00 PM - 9:00 PM (Followed by Dinner)</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -179,7 +179,7 @@ export default function Hero() {
                   </button>
 
                   <a
-                    href="/Brochure26july.pdf"
+                    href="/Brochure26july-ENG.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium"
@@ -188,7 +188,7 @@ export default function Hero() {
                   </a>
 
                   <a
-                    href="/REGISTRATION FORM.pdf"
+                    href="/REGESTRATIONFORM-ENG.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium"
