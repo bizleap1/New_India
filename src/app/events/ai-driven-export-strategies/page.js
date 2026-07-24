@@ -34,7 +34,7 @@ export default function AIDrivenExportStrategiesPage() {
         >
           <div className="max-w-4xl">
             <p className="text-xs lg:text-sm tracking-[0.25em] uppercase text-emerald-400/80 mb-4 lg:mb-6 font-light">
-              Upcoming Event
+              EVENT POSTPONED
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-serif leading-[1.1] lg:leading-[0.95] mb-4 tracking-tight">
               AI Driven Export Strategies
@@ -50,8 +50,8 @@ export default function AIDrivenExportStrategiesPage() {
             {/* Event Details */}
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 lg:gap-8 text-neutral-300 mb-8 lg:mb-12">
               {[
-                { icon: <FaCalendarAlt />, label: "26 July 2026", sub: "Sunday" },
-                { icon: <FaClock />, label: "3:00 PM - 9:00 PM", sub: "Followed by Dinner" },
+                { icon: <FaCalendarAlt />, label: <><span className="line-through text-neutral-500">26 July 2026</span> <span className="text-red-400 ml-2">Postponed</span></>, sub: "New Date TBA" },
+                { icon: <FaClock />, label: <span className="line-through text-neutral-500">3:00 PM - 9:00 PM</span>, sub: "Timing TBA" },
                 { icon: <FaMapMarkerAlt />, label: "Tuli Imperial", sub: "Nagpur, Maharashtra" }
               ].map((item, i) => (
                 <motion.div
@@ -80,11 +80,10 @@ export default function AIDrivenExportStrategiesPage() {
               className="flex flex-col sm:flex-row flex-wrap gap-4"
             >
               <button
-                onClick={() => setEventOpen(true)}
-                className="group px-6 py-4 lg:px-10 lg:py-5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all cursor-pointer"
+                disabled
+                className="group px-6 py-4 lg:px-10 lg:py-5 rounded-full border border-neutral-700 bg-neutral-900/50 text-neutral-500 font-medium flex items-center justify-center gap-3 cursor-not-allowed transition-all"
               >
-                Register Now
-                <FaChevronRight className="transition-transform group-hover:translate-x-1" />
+                Registration Closed
               </button>
 
               <a
@@ -286,11 +285,10 @@ export default function AIDrivenExportStrategiesPage() {
         <h2 className="text-3xl md:text-5xl font-serif mb-8">Ready to Scale Global?</h2>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onClick={() => setEventOpen(true)}
-            className="px-10 py-5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium flex items-center justify-center gap-3 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all text-lg"
+            disabled
+            className="px-10 py-5 rounded-full border border-neutral-700 bg-neutral-900/50 text-neutral-500 font-medium flex items-center justify-center gap-3 cursor-not-allowed transition-all text-lg"
           >
-            Register Now
-            <FaChevronRight />
+            Registration Closed
           </button>
           <a
             href="/Brochure26july-ENG.pdf"
