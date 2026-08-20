@@ -102,48 +102,36 @@ export default function Hero() {
               transition={{ delay: 0.4 }}
               className="w-full lg:w-1/2 max-w-lg mt-6 lg:mt-0"
             >
-              {/* Reduced padding for mobile: p-4 (mobile) -> p-6 (tablet) -> p-8 (desktop) */}
               <div className="p-4 sm:p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-neutral-900/95 to-black/95 backdrop-blur-md border border-emerald-800/30 shadow-2xl">
                 {/* Event Badge */}
                 <div className="flex items-center gap-2 mb-3 lg:mb-4">
                   <div className="p-1.5 rounded-lg bg-emerald-900/30">
                     <FaCalendarAlt className="text-emerald-400 text-sm lg:text-base" />
                   </div>
-                  <span className="text-sm lg:text-base font-bold text-red-400 tracking-wider">EVENT POSTPONED</span>
+                  <span className="text-sm lg:text-base font-bold text-emerald-400 tracking-wider">FREE ONLINE WORKSHOP</span>
                 </div>
 
-                {/* Slightly smaller heading for mobile */}
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-serif text-white mb-3 lg:mb-4">
-                  AI Driven Export Strategies<br/>
-                  <span className="text-emerald-400 text-base sm:text-lg md:text-xl lg:text-2xl">From Farm to Global Sales</span>
+                {/* Heading */}
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white mb-3 lg:mb-4 font-bold">
+                  Canton Fair 2026<br/>
+                  <span className="text-emerald-400 text-base sm:text-lg md:text-xl font-light">Free Online Workshop</span>
                 </h2>
 
-                {/* Reduced margin and smaller text for mobile */}
-                <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-3 lg:mb-6 leading-relaxed">
-                  Artificial Intelligence is transforming the export-import industry by making international trade faster, smarter and more efficient. Learn AI-powered export solutions, global market opportunities, export finance, government schemes and buyer discovery.
+                <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-3 lg:mb-6 leading-relaxed font-light">
+                  Planning to attend the 140th Canton Fair in China? Join our free online workshop to understand sourcing opportunities, delegation planning, industries covered, travel arrangements and the complete Canton Fair experience.
                 </p>
 
-                {/* Event Details - Reduced spacing for mobile */}
+                {/* Event Details */}
                 <div className="space-y-2 sm:space-y-3 lg:space-y-4 mb-3 lg:mb-6">
                   <div className="flex items-center gap-2">
                     <div className="p-1.5 sm:p-2 rounded-lg bg-neutral-800/50">
                       <FaCalendarAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
                     </div>
                     <div>
-                      <div className="font-medium text-xs sm:text-sm lg:text-base">
-                        <span className="line-through text-neutral-500">26 July 2026</span>
-                        <span className="text-red-400 ml-2">Postponed</span>
+                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">
+                        Sunday, 23 August 2026
                       </div>
-                      <div className="text-xs text-neutral-400">New Date TBA</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="p-1.5 sm:p-2 rounded-lg bg-neutral-800/50">
-                      <FaMapMarkerAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
-                    </div>
-                    <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">Tuli Imperial</div>
-                      <div className="text-xs text-neutral-400">37 Farm Land, Central Bazar Road<br/>Nagpur, Maharashtra</div>
+                      <div className="text-xs text-neutral-400">11:00 AM – 12:30 PM</div>
                     </div>
                   </div>
                 </div>
@@ -153,50 +141,51 @@ export default function Hero() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                   <div className="relative flex items-center justify-between p-4 sm:p-5 rounded-xl bg-black border border-emerald-500/30 backdrop-blur-xl">
                     <div className="flex flex-col">
-                      <span className="inline-block px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-2 w-fit">
-                        Registration Fee
+                      <span className="inline-block px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1 w-fit">
+                        Workshop Fee
                       </span>
                       <div className="flex items-baseline gap-3">
-                        <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">₹1,499</span>
+                        <span className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight">FREE</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-
-                {/* Action Buttons - Reduced padding for mobile */}
+                {/* Action Buttons */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   <Link
                     href="/events/ai-driven-export-strategies"
-                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-medium text-xs sm:text-sm flex items-center justify-center gap-2 overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/25"
+                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/25"
                   >
                     <span className="relative z-10 text-center">View Details</span>
                     <FaChevronRight className="relative z-10 text-xs transition-transform group-hover:translate-x-1 shrink-0" />
                   </Link>
 
-                  <button
-                    disabled
-                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-700 bg-neutral-900/50 text-neutral-500 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 cursor-not-allowed transition-all"
-                  >
-                    <span className="text-center">Registration Closed</span>
-                  </button>
-
                   <a
-                    href="/Brochure26july-ENG.pdf"
+                    href="https://wa.me/919028894149?text=Hello%2C%20I%20want%20to%20register%20for%20the%20free%20online%20Canton%20Fair%202026%20workshop."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium"
+                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all hover:bg-emerald-400"
+                  >
+                    <span className="text-center">Register for Free</span>
+                  </a>
+
+                  <a
+                    href="/Bifold%20Brochure.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300"
                   >
                     <span className="text-center">Brochure</span>
                   </a>
 
                   <a
-                    href="/REGESTRATIONFORM-ENG.pdf"
+                    href="/flyerrr%20(1)_260820_135954.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium"
+                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300"
                   >
-                    <span className="text-center">Offline Form</span>
+                    <span className="text-center">Event Flyer</span>
                   </a>
                 </div>
               </div>

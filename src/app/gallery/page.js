@@ -3,32 +3,33 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function GalleryPage() {
-  const galleryImages = [
-    "/f1.jpg",
-    "/gallery/DelhiIITF.jpg",
-    "/gallery/dgft.jpg",
-    "/gallery/FarmVisit.jpg",
-    "/gallery/GulfFood.jpg",
-    "/gallery/ICARYavatmal.jpg",
-    "/gallery/ICDMihan.jpg",
-    "/gallery/MCED.jpg",
-    "/gallery/ODOP.jpg",
-    "/gallery/PuneAwards.jpg",
-    "/gallery/SaudiArabia.jpg",
-    "/gallery/Spain.jpg",
-    "/gallery/WTC2023.jpg",
-    "/f2.jpg",
-    "/f3.jpg",
-    "/f4.jpg",
-    "/f5.jpg",
-    "/f6.jpg",
-    "/f7.jpg",
-    "/f8.jpg",
-    "/f9.jpg",
-    "/f10.jpg",
-    "/f11.jpg",
-    "/f12.jpg",
-    "/f.jpg",
+  const galleryItems = [
+    { type: "video", src: "/gallery-video.mp4", poster: "/gallery-video-thumb.jpg", title: "New India Export Event Highlights" },
+    { type: "image", src: "/f1.jpg" },
+    { type: "image", src: "/gallery/DelhiIITF.jpg" },
+    { type: "image", src: "/gallery/dgft.jpg" },
+    { type: "image", src: "/gallery/FarmVisit.jpg" },
+    { type: "image", src: "/gallery/GulfFood.jpg" },
+    { type: "image", src: "/gallery/ICARYavatmal.jpg" },
+    { type: "image", src: "/gallery/ICDMihan.jpg" },
+    { type: "image", src: "/gallery/MCED.jpg" },
+    { type: "image", src: "/gallery/ODOP.jpg" },
+    { type: "image", src: "/gallery/PuneAwards.jpg" },
+    { type: "image", src: "/gallery/SaudiArabia.jpg" },
+    { type: "image", src: "/gallery/Spain.jpg" },
+    { type: "image", src: "/gallery/WTC2023.jpg" },
+    { type: "image", src: "/f2.jpg" },
+    { type: "image", src: "/f3.jpg" },
+    { type: "image", src: "/f4.jpg" },
+    { type: "image", src: "/f5.jpg" },
+    { type: "image", src: "/f6.jpg" },
+    { type: "image", src: "/f7.jpg" },
+    { type: "image", src: "/f8.jpg" },
+    { type: "image", src: "/f9.jpg" },
+    { type: "image", src: "/f10.jpg" },
+    { type: "image", src: "/f11.jpg" },
+    { type: "image", src: "/f12.jpg" },
+    { type: "image", src: "/f.jpg" },
   ];
 
   return (
@@ -54,7 +55,7 @@ export default function GalleryPage() {
             <div className="w-20 h-1 bg-[#16a34a] mx-auto"></div>
           </div>
           <p className="max-w-2xl mx-auto text-white text-base sm:text-lg font-light tracking-wide">
-            A glimpse into our vibrant collection and visual highlights
+            A glimpse into our vibrant collection, event highlights, and global trade delegations
           </p>
         </div>
       </section>
@@ -62,23 +63,43 @@ export default function GalleryPage() {
       {/* ==== MASONRY GALLERY ==== */}
       <section className="w-full py-12 px-2 sm:px-8 bg-[#fdf3e6]">
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-2 sm:gap-4 space-y-2 sm:space-y-4 max-w-6xl mx-auto">
-          {galleryImages.map((img, i) => (
+          {galleryItems.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.05 }}
+              transition={{ duration: 0.6, delay: Math.min(i * 0.05, 0.4) }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer break-inside-avoid"
             >
-              <Image
-                src={img}
-                alt={`Gallery Image ${i + 1}`}
-                width={900}
-                height={900}
-                quality={100}
-                className="w-full h-auto rounded-xl object-cover hover:scale-105 transition-transform duration-300"
-              />
+              {item.type === "video" ? (
+                <div className="relative group">
+                  <video
+                    src={item.src}
+                    poster={item.poster}
+                    preload="metadata"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                    className="w-full h-auto rounded-xl object-cover hover:scale-[1.01] transition-transform duration-300 shadow-md border border-amber-900/10"
+                  />
+                  <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white font-medium flex items-center gap-1.5 pointer-events-none">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Featured Event
+                  </div>
+                </div>
+              ) : (
+                <Image
+                  src={item.src}
+                  alt={`Gallery Image ${i + 1}`}
+                  width={900}
+                  height={900}
+                  quality={90}
+                  className="w-full h-auto rounded-xl object-cover hover:scale-105 transition-transform duration-300"
+                />
+              )}
             </motion.div>
           ))}
         </div>

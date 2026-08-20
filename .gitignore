@@ -40,3 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 lint-results.txt
+
+# raw heavy media (uncompressed)
+*.MOV
+*.mov
+public/IMG_*.MP4
+public/IMG_*.mp4
