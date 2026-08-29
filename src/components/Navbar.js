@@ -62,19 +62,18 @@ export default function Navbar() {
 
   const brochures = [
     {
-      name: "Download Event Flyer",
-      path: "/EVENT26FLYER-ENG.pdf",
+      name: "Canton Fair Webinar Brochure",
+      path: "/Modern%20Online%20Webinar%20(2).pdf",
       type: "download"
     },
     {
-      name: "Download Brochure",
-      path: "/Brochure26july-ENG.pdf",
+      name: "NIE Tour Brochure",
+      path: "/NIE%20tour%20brochures.pdf",
       type: "download"
     },
     {
-      name: "Offline Registration Form",
-      path: "/REGESTRATIONFORM-ENG.pdf",
-      type: "download"
+      name: "Product Catalogues",
+      path: "/brochures"
     }
   ];
 

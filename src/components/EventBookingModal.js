@@ -54,8 +54,8 @@ export default function EventBookingModal({ open, setOpen }) {
             phone: formData.mobile,
           },
           bookingDetails: {
-            category: "Workshop",
-            subProducts: "AI Driven Export Strategies",
+            category: "Webinar",
+            subProducts: "Canton Fair 2026 Online Business Webinar",
           }
         }),
       });
@@ -69,7 +69,7 @@ export default function EventBookingModal({ open, setOpen }) {
         amount: order.amount,
         currency: order.currency,
         name: "New India Export",
-        description: "AI Driven Export Strategies",
+        description: "Canton Fair 2026 Online Business Webinar",
         order_id: order.id,
         handler: async function (response) {
           // 3. Verify Payment via Next.js API route
@@ -149,7 +149,7 @@ export default function EventBookingModal({ open, setOpen }) {
 
           <div className="p-8">
             <h2 className="text-2xl font-serif text-white mb-2">Reserve Your Seat</h2>
-            <p className="text-neutral-400 text-sm mb-8">AI Driven Export Strategies</p>
+            <p className="text-neutral-400 text-sm mb-8">Canton Fair 2026 Online Business Webinar</p>
 
             <form onSubmit={handlePayment} className="space-y-5">
               <div>

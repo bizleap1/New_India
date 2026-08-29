@@ -108,46 +108,32 @@ export default function Hero() {
                   <div className="p-1.5 rounded-lg bg-emerald-900/30">
                     <FaCalendarAlt className="text-emerald-400 text-sm lg:text-base" />
                   </div>
-                  <span className="text-sm lg:text-base font-bold text-emerald-400 tracking-wider">FREE ONLINE WORKSHOP</span>
+                  <span className="text-xs sm:text-sm font-bold text-emerald-400 tracking-wider">ONLINE WEBINAR</span>
                 </div>
 
                 {/* Heading */}
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white mb-3 lg:mb-4 font-bold">
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white mb-2 lg:mb-3 font-bold">
                   Canton Fair 2026<br/>
-                  <span className="text-emerald-400 text-base sm:text-lg md:text-xl font-light">Free Online Workshop</span>
+                  <span className="text-emerald-400 text-base sm:text-lg md:text-xl font-light">Online Business Webinar</span>
                 </h2>
 
-                <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-3 lg:mb-6 leading-relaxed font-light">
-                  Planning to attend the 140th Canton Fair in China? Join our free online workshop to understand sourcing opportunities, delegation planning, industries covered, travel arrangements and the complete Canton Fair experience.
+                <p className="text-emerald-300/90 text-xs sm:text-sm font-medium mb-3">
+                  India–China Business & Sourcing Delegation
+                </p>
+
+                <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-4 lg:mb-6 leading-relaxed font-light">
+                  Learn how to prepare for the Canton Fair, identify genuine manufacturers, evaluate suppliers, negotiate effectively and build reliable sourcing relationships in China.
                 </p>
 
                 {/* Event Details */}
-                <div className="space-y-2 sm:space-y-3 lg:space-y-4 mb-3 lg:mb-6">
-                  <div className="flex items-center gap-2">
-                    <div className="p-1.5 sm:p-2 rounded-lg bg-neutral-800/50">
-                      <FaCalendarAlt className="text-emerald-400 text-xs sm:text-sm lg:text-base" />
-                    </div>
-                    <div>
-                      <div className="font-medium text-white text-xs sm:text-sm lg:text-base">
-                        Sunday, 23 August 2026
-                      </div>
-                      <div className="text-xs text-neutral-400">11:00 AM – 12:30 PM</div>
-                    </div>
+                <div className="grid grid-cols-2 gap-3 mb-4 lg:mb-6">
+                  <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
+                    <div className="text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Date</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">30 August 2026</div>
                   </div>
-                </div>
-
-                {/* Pricing Section */}
-                <div className="relative mb-6 group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                  <div className="relative flex items-center justify-between p-4 sm:p-5 rounded-xl bg-black border border-emerald-500/30 backdrop-blur-xl">
-                    <div className="flex flex-col">
-                      <span className="inline-block px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1 w-fit">
-                        Workshop Fee
-                      </span>
-                      <div className="flex items-baseline gap-3">
-                        <span className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight">FREE</span>
-                      </div>
-                    </div>
+                  <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
+                    <div className="text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Time</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">2:00 PM onwards (IST)</div>
                   </div>
                 </div>
 
@@ -162,30 +148,30 @@ export default function Hero() {
                   </Link>
 
                   <a
-                    href="https://wa.me/919028894149?text=Hello%2C%20I%20want%20to%20register%20for%20the%20free%20online%20Canton%20Fair%202026%20workshop."
+                    href="https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Online%20Webinar."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all hover:bg-emerald-400"
                   >
-                    <span className="text-center">Register for Free</span>
+                    <span className="text-center">Register on WhatsApp</span>
                   </a>
 
                   <a
-                    href="/Bifold%20Brochure.pdf"
+                    href="/Modern%20Online%20Webinar%20(2).pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300"
+                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
                   >
-                    <span className="text-center">Brochure</span>
+                    <span className="text-center">Webinar Brochure</span>
                   </a>
 
                   <a
-                    href="/flyerrr%20(1)_260820_135954.pdf"
+                    href="/NIE%20tour%20brochures.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300"
+                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
                   >
-                    <span className="text-center">Event Flyer</span>
+                    <span className="text-center">Tour Brochure</span>
                   </a>
                 </div>
               </div>
