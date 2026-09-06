@@ -54,8 +54,8 @@ export default function EventBookingModal({ open, setOpen }) {
             phone: formData.mobile,
           },
           bookingDetails: {
-            category: "Webinar",
-            subProducts: "Canton Fair 2026 Online Business Webinar",
+            category: "Workshop",
+            subProducts: "Canton Fair 2026 Free Online Workshop",
           }
         }),
       });
@@ -69,7 +69,7 @@ export default function EventBookingModal({ open, setOpen }) {
         amount: order.amount,
         currency: order.currency,
         name: "New India Export",
-        description: "Canton Fair 2026 Online Business Webinar",
+        description: "Canton Fair 2026 Free Online Workshop",
         order_id: order.id,
         handler: async function (response) {
           // 3. Verify Payment via Next.js API route
@@ -149,7 +149,7 @@ export default function EventBookingModal({ open, setOpen }) {
 
           <div className="p-8">
             <h2 className="text-2xl font-serif text-white mb-2">Reserve Your Seat</h2>
-            <p className="text-neutral-400 text-sm mb-8">Canton Fair 2026 Online Business Webinar</p>
+            <p className="text-neutral-400 text-sm mb-8">Canton Fair 2026 Free Online Workshop • Sunday, 6 September 2026 | 1:00 PM</p>
 
             <form onSubmit={handlePayment} className="space-y-5">
               <div>

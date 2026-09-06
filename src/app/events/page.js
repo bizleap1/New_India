@@ -15,7 +15,7 @@ import {
 import Link from "next/link";
 
 export default function EventPage() {
-  const whatsappUrl = "https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Online%20Webinar.";
+  const whatsappUrl = "https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Free%20Online%20Workshop.";
 
   return (
     <div className="bg-black text-neutral-100 min-h-screen">
@@ -47,14 +47,14 @@ export default function EventPage() {
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 backdrop-blur-md mb-4 lg:mb-6">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <p className="text-xs lg:text-sm tracking-[0.2em] uppercase text-emerald-400 font-semibold">
-                  ONLINE WEBINAR
+                  FREE ONLINE WORKSHOP
                 </p>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.15] mb-3 tracking-tight font-bold text-white">
                 Canton Fair 2026<br />
                 <span className="bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-300 bg-clip-text text-transparent">
-                  Online Business Webinar
+                  Free Online Workshop
                 </span>
               </h1>
               
@@ -62,39 +62,62 @@ export default function EventPage() {
                 India–China Business & Sourcing Delegation
               </h2>
 
-              <p className="text-sm sm:text-base lg:text-lg text-neutral-300 mb-6 lg:mb-8 font-light leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-neutral-300 mb-4 lg:mb-6 font-light leading-relaxed">
                 Learn how to prepare for the Canton Fair, identify genuine manufacturers, evaluate suppliers, negotiate effectively and build reliable sourcing relationships in China.
               </p>
 
+              {/* Final Display Highlight Banner */}
+              <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-950/50 border border-emerald-500/30 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                  <span className="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide">
+                    Sunday, 6 September 2026 | 1:00 PM | Online Workshop
+                  </span>
+                </div>
+                <span className="self-start sm:self-auto px-2.5 py-0.5 rounded-full bg-emerald-500 text-black text-xs font-bold uppercase tracking-wider shrink-0">
+                  Free
+                </span>
+              </div>
+
               {/* Event Details Badges */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-neutral-300 mb-6 lg:mb-8">
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
-                  <div className="p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
-                    <FaCalendarAlt className="text-base" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-neutral-300 mb-6 lg:mb-8">
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
+                  <div className="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
+                    <FaCalendarAlt className="text-sm" />
                   </div>
                   <div>
-                    <div className="font-semibold text-sm text-white">30 August 2026</div>
-                    <div className="text-xs text-neutral-400">Webinar Date</div>
+                    <div className="font-semibold text-xs sm:text-sm text-white">6 Sept 2026</div>
+                    <div className="text-[10px] text-emerald-400 font-medium">Sunday</div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
-                  <div className="p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
-                    <FaClock className="text-base" />
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
+                  <div className="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
+                    <FaClock className="text-sm" />
                   </div>
                   <div>
-                    <div className="font-semibold text-sm text-white">2:00 PM onwards</div>
-                    <div className="text-xs text-neutral-400">IST Timing</div>
+                    <div className="font-semibold text-xs sm:text-sm text-white">1:00 PM</div>
+                    <div className="text-[10px] text-neutral-400">IST Timing</div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
-                  <div className="p-2.5 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
-                    <FaLaptopHouse className="text-base" />
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
+                  <div className="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
+                    <FaLaptopHouse className="text-sm" />
                   </div>
                   <div>
-                    <div className="font-semibold text-sm text-white">Online Webinar</div>
-                    <div className="text-xs text-neutral-400">Live Session</div>
+                    <div className="font-semibold text-xs sm:text-sm text-white">Online</div>
+                    <div className="text-[10px] text-neutral-400">Workshop</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
+                  <div className="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
+                    <FaCalendarAlt className="text-sm" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-xs sm:text-sm text-emerald-400">Free</div>
+                    <div className="text-[10px] text-neutral-400">100% Free</div>
                   </div>
                 </div>
               </div>
@@ -158,7 +181,7 @@ export default function EventPage() {
                 <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden">
                   <Image
                     src="/canton-webinar-thumb.jpg"
-                    alt="Canton Fair 2026 Online Business Webinar"
+                    alt="Canton Fair 2026 Free Online Workshop"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     priority
@@ -166,8 +189,8 @@ export default function EventPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
                   <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-bold text-emerald-400">30 August 2026</div>
-                      <div className="text-[11px] text-neutral-300">2:00 PM onwards (IST)</div>
+                      <div className="text-xs font-bold text-emerald-400">Sunday, 6 September 2026</div>
+                      <div className="text-[11px] text-neutral-300">1:00 PM (IST) | Free Workshop</div>
                     </div>
                     <span className="px-2.5 py-1 rounded-full bg-emerald-500 text-black text-[10px] font-bold uppercase tracking-wider">
                       Online

@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa";
 
 export default function CantonFairEventPage() {
-  const whatsappUrl = "https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Online%20Webinar.";
+  const whatsappUrl = "https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Free%20Online%20Workshop.";
   const webinarBrochureUrl = "/Modern%20Online%20Webinar%20(2).pdf";
   const tourBrochureUrl = "/NIE%20tour%20brochures.pdf";
 
@@ -92,7 +92,7 @@ export default function CantonFairEventPage() {
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 backdrop-blur-md mb-4 lg:mb-6">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <p className="text-xs lg:text-sm tracking-[0.2em] uppercase text-emerald-400 font-semibold">
-                  ONLINE BUSINESS WEBINAR
+                  FREE ONLINE WORKSHOP
                 </p>
               </div>
 
@@ -100,7 +100,7 @@ export default function CantonFairEventPage() {
               <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif leading-[1.12] mb-3 text-white font-bold tracking-tight">
                 Canton Fair 2026<br />
                 <span className="bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-300 bg-clip-text text-transparent">
-                  Online Business Webinar
+                  Free Online Workshop
                 </span>
               </h1>
 
@@ -110,34 +110,55 @@ export default function CantonFairEventPage() {
               </h2>
 
               {/* Description */}
-              <p className="text-base sm:text-lg text-neutral-300 mb-6 max-w-2xl font-light leading-relaxed">
+              <p className="text-base sm:text-lg text-neutral-300 mb-4 lg:mb-6 max-w-2xl font-light leading-relaxed">
                 Learn how to prepare for the Canton Fair, identify genuine manufacturers, evaluate suppliers, negotiate effectively and build reliable sourcing relationships in China.
               </p>
 
+              {/* Final Display Highlight Banner */}
+              <div className="p-3 sm:p-3.5 rounded-2xl bg-emerald-950/50 border border-emerald-500/40 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                  <span className="text-xs sm:text-sm md:text-base font-bold text-white tracking-wide">
+                    Sunday, 6 September 2026 | 1:00 PM | Online Workshop
+                  </span>
+                </div>
+                <span className="self-start sm:self-auto px-3 py-1 rounded-full bg-emerald-500 text-black text-xs font-bold uppercase tracking-wider">
+                  Free
+                </span>
+              </div>
+
               {/* Event Quick Info Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
-                <div className="p-3.5 rounded-2xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mb-6">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md">
                   <div className="flex items-center gap-2 text-emerald-400 mb-1 text-xs font-semibold">
                     <FaCalendarAlt /> Date
                   </div>
-                  <div className="text-sm sm:text-base font-bold text-white">30 August 2026</div>
-                  <div className="text-[11px] text-neutral-400">Live Webinar</div>
+                  <div className="text-xs sm:text-sm md:text-base font-bold text-white">6 Sept 2026</div>
+                  <div className="text-[10px] sm:text-[11px] text-emerald-400 font-medium">Sunday</div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md">
                   <div className="flex items-center gap-2 text-emerald-400 mb-1 text-xs font-semibold">
                     <FaClock /> Time
                   </div>
-                  <div className="text-sm sm:text-base font-bold text-white">2:00 PM onwards</div>
-                  <div className="text-[11px] text-neutral-400">Indian Standard Time (IST)</div>
+                  <div className="text-xs sm:text-sm md:text-base font-bold text-white">1:00 PM</div>
+                  <div className="text-[10px] sm:text-[11px] text-neutral-400">IST Timing</div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md col-span-2 sm:col-span-1">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md">
                   <div className="flex items-center gap-2 text-emerald-400 mb-1 text-xs font-semibold">
                     <FaLaptopHouse /> Mode
                   </div>
-                  <div className="text-sm sm:text-base font-bold text-white">Online Webinar</div>
-                  <div className="text-[11px] text-neutral-400">Access link via WhatsApp</div>
+                  <div className="text-xs sm:text-sm md:text-base font-bold text-white">Online</div>
+                  <div className="text-[10px] sm:text-[11px] text-neutral-400">Live Workshop</div>
+                </div>
+
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md">
+                  <div className="flex items-center gap-2 text-emerald-400 mb-1 text-xs font-semibold">
+                    <FaCheckCircle /> Fee
+                  </div>
+                  <div className="text-xs sm:text-sm md:text-base font-bold text-emerald-400">Free</div>
+                  <div className="text-[10px] sm:text-[11px] text-neutral-400">100% Free</div>
                 </div>
               </div>
 
@@ -181,7 +202,7 @@ export default function CantonFairEventPage() {
                 <div className="relative aspect-[16/10] sm:aspect-[16/11] w-full rounded-2xl overflow-hidden bg-neutral-950">
                   <Image
                     src="/canton-webinar-thumb.jpg"
-                    alt="Canton Fair 2026 Online Business Webinar Thumbnail"
+                    alt="Canton Fair 2026 Free Online Workshop Thumbnail"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     priority
@@ -210,14 +231,14 @@ export default function CantonFairEventPage() {
         </motion.div>
       </section>
 
-      {/* 1. ABOUT THE WEBINAR */}
+      {/* 1. ABOUT THE WORKSHOP */}
       <section className="py-16 lg:py-20 px-4 sm:px-6 relative border-t border-neutral-900 bg-neutral-950">
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-xs lg:text-sm tracking-widest uppercase text-emerald-400 mb-2 font-semibold">
-            Webinar Overview
+            Workshop Overview
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-6 text-white font-bold">
-            About the Online Webinar
+            About the Free Online Workshop
           </h2>
           <div className="w-16 h-1 bg-emerald-500 mx-auto rounded-full mb-6" />
           <p className="text-base sm:text-lg lg:text-xl text-neutral-300 leading-relaxed font-light">
@@ -391,13 +412,29 @@ export default function CantonFairEventPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            {/* Contact Card */}
+            {/* Contact & Registration Card */}
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 flex flex-col justify-between">
               <div>
-                <h3 className="text-xl font-bold text-white mb-4">New India Export</h3>
-                <p className="text-sm text-neutral-300 mb-6 font-light leading-relaxed">
-                  Have questions about the Canton Fair 2026 Online Webinar or Phase 3 Business Delegation? Connect with our trade specialists directly.
+                <h3 className="text-xl font-bold text-white mb-2">Free Online Workshop Registration</h3>
+                <p className="text-sm text-neutral-300 mb-4 font-light leading-relaxed">
+                  Have questions about the Canton Fair 2026 Free Online Workshop or Phase 3 Business Delegation? Connect with our trade specialists directly.
                 </p>
+
+                {/* Workshop Schedule Box */}
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 mb-5">
+                  <div className="text-[11px] text-emerald-400 font-semibold uppercase tracking-wider mb-1">
+                    Workshop Schedule & Details
+                  </div>
+                  <div className="text-xs sm:text-sm font-bold text-white mb-1">
+                    Sunday, 6 September 2026 | 1:00 PM | Online Workshop
+                  </div>
+                  <div className="text-[11px] text-neutral-300 flex items-center gap-3">
+                    <span>Mode: <strong className="text-emerald-400">Online</strong></span>
+                    <span>•</span>
+                    <span>Fee: <strong className="text-emerald-400">100% Free</strong></span>
+                  </div>
+                </div>
+
                 <div className="space-y-4">
                   <a
                     href="tel:+919028894149"
@@ -509,15 +546,22 @@ export default function CantonFairEventPage() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 backdrop-blur-md mb-6">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <p className="text-xs tracking-[0.2em] uppercase text-emerald-400 font-semibold">
-              JOIN THE WEBINAR
+              JOIN THE FREE WORKSHOP
             </p>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4 text-white font-bold">
             Start Your Canton Fair Journey
           </h2>
-          <p className="text-base sm:text-lg text-neutral-300 mb-8 font-light leading-relaxed">
-            Register for the Canton Fair 2026 Online Business Webinar on 30 August 2026 and explore the Phase 3 Business Delegation in China.
+          <p className="text-base sm:text-lg text-neutral-300 mb-6 font-light leading-relaxed">
+            Register for the Canton Fair 2026 Free Online Workshop on Sunday, 6 September 2026 at 1:00 PM and explore the Phase 3 Business Delegation in China.
           </p>
+
+          {/* Final Display Highlight Badge */}
+          <div className="inline-block px-5 py-2.5 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 mb-8 shadow-lg shadow-emerald-950/40">
+            <span className="text-xs sm:text-sm md:text-base font-bold text-emerald-300">
+              Sunday, 6 September 2026 | 1:00 PM | Online Workshop
+            </span>
+          </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a

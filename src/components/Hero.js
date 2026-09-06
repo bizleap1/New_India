@@ -108,32 +108,51 @@ export default function Hero() {
                   <div className="p-1.5 rounded-lg bg-emerald-900/30">
                     <FaCalendarAlt className="text-emerald-400 text-sm lg:text-base" />
                   </div>
-                  <span className="text-xs sm:text-sm font-bold text-emerald-400 tracking-wider">ONLINE WEBINAR</span>
+                  <span className="text-xs sm:text-sm font-bold text-emerald-400 tracking-wider">FREE ONLINE WORKSHOP</span>
                 </div>
 
                 {/* Heading */}
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white mb-2 lg:mb-3 font-bold">
                   Canton Fair 2026<br/>
-                  <span className="text-emerald-400 text-base sm:text-lg md:text-xl font-light">Online Business Webinar</span>
+                  <span className="text-emerald-400 text-base sm:text-lg md:text-xl font-light">Free Online Workshop</span>
                 </h2>
 
                 <p className="text-emerald-300/90 text-xs sm:text-sm font-medium mb-3">
                   India–China Business & Sourcing Delegation
                 </p>
 
-                <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-4 lg:mb-6 leading-relaxed font-light">
+                <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-3 lg:mb-4 leading-relaxed font-light">
                   Learn how to prepare for the Canton Fair, identify genuine manufacturers, evaluate suppliers, negotiate effectively and build reliable sourcing relationships in China.
                 </p>
 
-                {/* Event Details */}
-                <div className="grid grid-cols-2 gap-3 mb-4 lg:mb-6">
-                  <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
-                    <div className="text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Date</div>
-                    <div className="font-semibold text-white text-xs sm:text-sm">30 August 2026</div>
+                {/* Final Display Highlight Badge */}
+                <div className="mb-4 p-2.5 sm:p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-center">
+                  <div className="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide">
+                    Sunday, 6 September 2026 | 1:00 PM | Online Workshop
                   </div>
-                  <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
-                    <div className="text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Time</div>
-                    <div className="font-semibold text-white text-xs sm:text-sm">2:00 PM onwards (IST)</div>
+                </div>
+
+                {/* Event Details */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 mb-4 lg:mb-6">
+                  <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
+                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Date</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">6 Sept 2026</div>
+                    <div className="text-[10px] text-emerald-400 font-medium">Sunday</div>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
+                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Time</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">1:00 PM</div>
+                    <div className="text-[10px] text-neutral-400">IST Timing</div>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
+                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Mode</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">Online</div>
+                    <div className="text-[10px] text-neutral-400">Workshop</div>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
+                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Fee</div>
+                    <div className="font-semibold text-emerald-400 text-xs sm:text-sm">Free</div>
+                    <div className="text-[10px] text-neutral-400">100% Free</div>
                   </div>
                 </div>
 
@@ -148,7 +167,7 @@ export default function Hero() {
                   </Link>
 
                   <a
-                    href="https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Online%20Webinar."
+                    href="https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Free%20Online%20Workshop."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all hover:bg-emerald-400"
