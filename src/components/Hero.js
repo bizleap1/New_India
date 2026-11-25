@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import BookingModal from "./BookingModal";
 import EventBookingModal from "./EventBookingModal";
-import { FaCalendarAlt, FaMapMarkerAlt, FaChevronRight, FaStar } from "react-icons/fa";
+import { FaTag, FaChevronRight, FaStar, FaDownload, FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Hero() {
@@ -100,97 +100,123 @@ export default function Hero() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
-              className="w-full lg:w-1/2 max-w-lg mt-6 lg:mt-0"
+              className="w-full lg:w-1/2 max-w-xl mt-6 lg:mt-0"
             >
-              <div className="p-4 sm:p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-neutral-900/95 to-black/95 backdrop-blur-md border border-emerald-800/30 shadow-2xl">
-                {/* Event Badge */}
-                <div className="flex items-center gap-2 mb-3 lg:mb-4">
-                  <div className="p-1.5 rounded-lg bg-emerald-900/30">
-                    <FaCalendarAlt className="text-emerald-400 text-sm lg:text-base" />
+              <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-gradient-to-br from-neutral-900/95 to-black/95 backdrop-blur-md border border-emerald-500/30 shadow-2xl">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-start">
+                  {/* Left: Text & Highlights */}
+                  <div className="flex-1 min-w-0">
+                    {/* Event Badge */}
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <div className="p-1.5 rounded-lg bg-emerald-500/20">
+                        <FaTag className="text-emerald-400 text-xs sm:text-sm" />
+                      </div>
+                      <span className="text-[11px] sm:text-xs font-bold text-emerald-400 tracking-wider uppercase">
+                        ONE DAY ONLY • 27 NOV 2026
+                      </span>
+                    </div>
+
+                    {/* Heading */}
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif text-white mb-1.5 font-bold leading-tight">
+                      Black Friday Sale<br />
+                      <span className="text-emerald-400 text-lg sm:text-xl lg:text-2xl font-bold">Up to 70% OFF</span>
+                    </h2>
+
+                    <p className="text-emerald-300/90 text-xs sm:text-sm font-medium mb-2">
+                      Up to 70% off on export services
+                    </p>
+
+                    <p className="text-neutral-300 text-xs sm:text-sm mb-3 leading-relaxed font-light">
+                      Documentation, customs, sourcing, inspection and compliance, all discounted on 27 November only.
+                    </p>
                   </div>
-                  <span className="text-xs sm:text-sm font-bold text-emerald-400 tracking-wider">FREE ONLINE WORKSHOP</span>
+
+                  {/* Right: Poster Preview */}
+                  <a
+                    href="/brochure/Black%20Friday%20Poster@2x%20(2).png"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="View Black Friday Sale Poster"
+                    className="hidden sm:block relative w-28 lg:w-32 aspect-[5/7] shrink-0 rounded-xl overflow-hidden border border-emerald-500/40 shadow-lg hover:scale-[1.03] transition-transform"
+                  >
+                    <Image
+                      src="/brochure/Black Friday Poster@2x (2).png"
+                      alt="New India Export Black Friday Sale 70% OFF Poster"
+                      fill
+                      className="object-contain object-left-top scale-[1.14] origin-top-left"
+                      priority
+                    />
+                  </a>
                 </div>
 
-                {/* Heading */}
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif text-white mb-2 lg:mb-3 font-bold">
-                  Canton Fair 2026<br/>
-                  <span className="text-emerald-400 text-base sm:text-lg md:text-xl font-light">Free Online Workshop</span>
-                </h2>
-
-                <p className="text-emerald-300/90 text-xs sm:text-sm font-medium mb-3">
-                  India–China Business & Sourcing Delegation
-                </p>
-
-                <p className="text-neutral-300 text-xs sm:text-sm lg:text-base mb-3 lg:mb-4 leading-relaxed font-light">
-                  Learn how to prepare for the Canton Fair, identify genuine manufacturers, evaluate suppliers, negotiate effectively and build reliable sourcing relationships in China.
-                </p>
-
-                {/* Final Display Highlight Badge */}
-                <div className="mb-4 p-2.5 sm:p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-center">
+                {/* Highlight Banner */}
+                <div className="mb-3.5 p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center">
                   <div className="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide">
-                    Sunday, 6 September 2026 | 1:00 PM | Online Workshop
+                    Friday, 27 November 2026 | Services start at ₹1,499 (was ₹4,999)
                   </div>
                 </div>
 
-                {/* Event Details */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 mb-4 lg:mb-6">
+                {/* Sale Details */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
                   <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
-                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Date</div>
-                    <div className="font-semibold text-white text-xs sm:text-sm">6 Sept 2026</div>
-                    <div className="text-[10px] text-emerald-400 font-medium">Sunday</div>
+                    <div className="text-[10px] uppercase tracking-wider text-neutral-400 mb-0.5">Date</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">27 Nov 2026</div>
+                    <div className="text-[10px] text-emerald-400 font-medium">Friday Only</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
-                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Time</div>
-                    <div className="font-semibold text-white text-xs sm:text-sm">1:00 PM</div>
-                    <div className="text-[10px] text-neutral-400">IST Timing</div>
+                    <div className="text-[10px] uppercase tracking-wider text-neutral-400 mb-0.5">Discount</div>
+                    <div className="font-semibold text-emerald-400 text-xs sm:text-sm">Up to 70%</div>
+                    <div className="text-[10px] text-neutral-400">Service Fees</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
-                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Mode</div>
-                    <div className="font-semibold text-white text-xs sm:text-sm">Online</div>
-                    <div className="text-[10px] text-neutral-400">Workshop</div>
+                    <div className="text-[10px] uppercase tracking-wider text-neutral-400 mb-0.5">Starts At</div>
+                    <div className="font-semibold text-white text-xs sm:text-sm">₹1,499</div>
+                    <div className="text-[10px] text-neutral-400 line-through">₹4,999</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-neutral-800/50 border border-neutral-700/40">
-                    <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-neutral-400 mb-0.5">Fee</div>
-                    <div className="font-semibold text-emerald-400 text-xs sm:text-sm">Free</div>
-                    <div className="text-[10px] text-neutral-400">100% Free</div>
+                    <div className="text-[10px] uppercase tracking-wider text-neutral-400 mb-0.5">Offers</div>
+                    <div className="font-semibold text-emerald-400 text-xs sm:text-sm">8 Services</div>
+                    <div className="text-[10px] text-neutral-400">3 Bundles</div>
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                   <Link
                     href="/events/ai-driven-export-strategies"
-                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/25"
+                    className="group w-full px-4 py-2.5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 overflow-hidden transition-all hover:shadow-lg hover:shadow-emerald-500/25"
                   >
-                    <span className="relative z-10 text-center">View Details</span>
+                    <span className="relative z-10 text-center">View Sale Details</span>
                     <FaChevronRight className="relative z-10 text-xs transition-transform group-hover:translate-x-1 shrink-0" />
                   </Link>
 
                   <a
-                    href="https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Free%20Online%20Workshop."
+                    href="https://wa.me/919967084149?text=Hi%2C%20I%20want%20to%20claim%20the%20Black%20Friday%20Sale%202026%20offer%20(Up%20to%2070%25%20OFF)."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all hover:bg-emerald-400"
+                    className="group w-full px-4 py-2.5 rounded-full bg-emerald-500 text-black font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all hover:bg-emerald-400"
                   >
-                    <span className="text-center">Register on WhatsApp</span>
+                    <FaWhatsapp className="text-sm shrink-0" />
+                    <span className="text-center">Claim on WhatsApp</span>
                   </a>
 
                   <a
-                    href="/Modern%20Online%20Webinar%20(2).pdf"
+                    href="/brochure/new-india-export-black-friday.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
+                    className="w-full px-4 py-2.5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-500/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
                   >
-                    <span className="text-center">Webinar Brochure</span>
+                    <FaDownload className="text-emerald-400 text-xs shrink-0" />
+                    <span className="text-center">Sale Brochure</span>
                   </a>
 
                   <a
-                    href="/NIE%20tour%20brochures.pdf"
+                    href="/brochure/Black%20Friday%20Poster@2x%20(2).png"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-4 py-2.5 sm:px-5 sm:py-3 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
+                    className="w-full px-4 py-2.5 rounded-full border border-neutral-800 bg-neutral-900/40 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
                   >
-                    <span className="text-center">Tour Brochure</span>
+                    <span className="text-center">View Sale Poster</span>
                   </a>
                 </div>
               </div>

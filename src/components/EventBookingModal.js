@@ -54,8 +54,8 @@ export default function EventBookingModal({ open, setOpen }) {
             phone: formData.mobile,
           },
           bookingDetails: {
-            category: "Workshop",
-            subProducts: "Canton Fair 2026 Free Online Workshop",
+            category: "Black Friday Sale",
+            subProducts: "Black Friday Sale 2026 - Export Services",
           }
         }),
       });
@@ -69,7 +69,7 @@ export default function EventBookingModal({ open, setOpen }) {
         amount: order.amount,
         currency: order.currency,
         name: "New India Export",
-        description: "Canton Fair 2026 Free Online Workshop",
+        description: "Black Friday Sale 2026 - Export Services",
         order_id: order.id,
         handler: async function (response) {
           // 3. Verify Payment via Next.js API route
@@ -148,8 +148,8 @@ export default function EventBookingModal({ open, setOpen }) {
           </button>
 
           <div className="p-8">
-            <h2 className="text-2xl font-serif text-white mb-2">Reserve Your Seat</h2>
-            <p className="text-neutral-400 text-sm mb-8">Canton Fair 2026 Free Online Workshop • Sunday, 6 September 2026 | 1:00 PM</p>
+            <h2 className="text-2xl font-serif text-white mb-2">Claim Your Offer</h2>
+            <p className="text-neutral-400 text-sm mb-8">Black Friday Sale 2026 • Friday, 27 November 2026 | Up to 70% OFF</p>
 
             <form onSubmit={handlePayment} className="space-y-5">
               <div>

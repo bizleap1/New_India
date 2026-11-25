@@ -1,37 +1,39 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { 
-  FaCalendarAlt, 
-  FaClock, 
-  FaChevronRight, 
-  FaLaptopHouse, 
-  FaWhatsapp, 
+import {
+  FaCalendarAlt,
+  FaTag,
+  FaChevronRight,
+  FaLayerGroup,
+  FaWhatsapp,
   FaDownload,
-  FaCheckCircle,
-  FaMapMarkerAlt
+  FaRupeeSign,
+  FaBolt,
 } from "react-icons/fa";
 import Link from "next/link";
 
 export default function EventPage() {
-  const whatsappUrl = "https://wa.me/919028894149?text=Hi%2C%20I%20want%20to%20register%20for%20the%20Canton%20Fair%202026%20Free%20Online%20Workshop.";
+  const whatsappUrl =
+    "https://wa.me/919967084149?text=Hi%2C%20I%20want%20to%20claim%20the%20Black%20Friday%20Sale%202026%20offer%20(Up%20to%2070%25%20OFF).";
+  const brochureUrl = "/brochure/new-india-export-black-friday.pdf";
+  const posterUrl = "/brochure/Black%20Friday%20Poster@2x%20(2).png";
 
   return (
     <div className="bg-black text-neutral-100 min-h-screen">
-      {/* HERO / EVENT SHOWCASE SECTION */}
+      {/* HERO / BLACK FRIDAY SALE SHOWCASE SECTION */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-16 overflow-hidden pt-24 pb-16">
-
         {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105 transition-transform duration-1000"
-          style={{ backgroundImage: `url('/canton-fair-bg.jpg')` }}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25 scale-105 transition-transform duration-1000"
+          style={{ backgroundImage: `url('/Hero.jpg')` }}
         />
 
         {/* Dark Overlays */}
-        <div className="absolute inset-0 bg-black/75" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-neutral-950" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:40px_40px] lg:bg-[size:80px_80px]" />
+        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/85 to-neutral-950" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(245,158,11,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(245,158,11,0.03)_1px,transparent_1px)] bg-[size:40px_40px] lg:bg-[size:80px_80px]" />
 
         {/* CONTENT */}
         <motion.div
@@ -41,41 +43,40 @@ export default function EventPage() {
           className="relative z-10 max-w-6xl mx-auto w-full"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
             {/* Left Content Column */}
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 backdrop-blur-md mb-4 lg:mb-6">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <p className="text-xs lg:text-sm tracking-[0.2em] uppercase text-emerald-400 font-semibold">
-                  FREE ONLINE WORKSHOP
+                  ONE DAY ONLY • BLACK FRIDAY SALE
                 </p>
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.15] mb-3 tracking-tight font-bold text-white">
-                Canton Fair 2026<br />
+                Black Friday Sale 2026<br />
                 <span className="bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-300 bg-clip-text text-transparent">
-                  Free Online Workshop
+                  Up to 70% OFF
                 </span>
               </h1>
-              
+
               <h2 className="text-lg sm:text-xl md:text-2xl font-serif leading-snug text-emerald-400 mb-4 font-light">
-                India–China Business & Sourcing Delegation
+                Up to 70% off on export services
               </h2>
 
               <p className="text-sm sm:text-base lg:text-lg text-neutral-300 mb-4 lg:mb-6 font-light leading-relaxed">
-                Learn how to prepare for the Canton Fair, identify genuine manufacturers, evaluate suppliers, negotiate effectively and build reliable sourcing relationships in China.
+                Documentation, customs, sourcing, inspection and compliance, all discounted on 27 November only. Services start at ₹1,499 (was ₹4,999).
               </p>
 
-              {/* Final Display Highlight Banner */}
-              <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-950/50 border border-emerald-500/30 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+              {/* Highlight Banner */}
+              <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                 <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                   <span className="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide">
-                    Sunday, 6 September 2026 | 1:00 PM | Online Workshop
+                    Friday, 27 November 2026 | Ends 11:59 PM IST | One Day Only
                   </span>
                 </div>
                 <span className="self-start sm:self-auto px-2.5 py-0.5 rounded-full bg-emerald-500 text-black text-xs font-bold uppercase tracking-wider shrink-0">
-                  Free
+                  70% OFF
                 </span>
               </div>
 
@@ -86,49 +87,50 @@ export default function EventPage() {
                     <FaCalendarAlt className="text-sm" />
                   </div>
                   <div>
-                    <div className="font-semibold text-xs sm:text-sm text-white">6 Sept 2026</div>
-                    <div className="text-[10px] text-emerald-400 font-medium">Sunday</div>
+                    <div className="font-semibold text-xs sm:text-sm text-white">27 Nov 2026</div>
+                    <div className="text-[10px] text-emerald-400 font-medium">Friday Only</div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
                   <div className="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
-                    <FaClock className="text-sm" />
+                    <FaTag className="text-sm" />
                   </div>
                   <div>
-                    <div className="font-semibold text-xs sm:text-sm text-white">1:00 PM</div>
-                    <div className="text-[10px] text-neutral-400">IST Timing</div>
+                    <div className="font-semibold text-xs sm:text-sm text-white">Up to 70%</div>
+                    <div className="text-[10px] text-neutral-400">Service Fees</div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
                   <div className="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
-                    <FaLaptopHouse className="text-sm" />
+                    <FaRupeeSign className="text-sm" />
                   </div>
                   <div>
-                    <div className="font-semibold text-xs sm:text-sm text-white">Online</div>
-                    <div className="text-[10px] text-neutral-400">Workshop</div>
+                    <div className="font-semibold text-xs sm:text-sm text-white">₹1,499</div>
+                    <div className="text-[10px] text-neutral-400 line-through">₹4,999</div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-900/80 border border-neutral-800">
                   <div className="p-2 rounded-lg bg-emerald-950/60 border border-emerald-800/40 text-emerald-400">
-                    <FaCalendarAlt className="text-sm" />
+                    <FaLayerGroup className="text-sm" />
                   </div>
                   <div>
-                    <div className="font-semibold text-xs sm:text-sm text-emerald-400">Free</div>
-                    <div className="text-[10px] text-neutral-400">100% Free</div>
+                    <div className="font-semibold text-xs sm:text-sm text-emerald-400">8 Services</div>
+                    <div className="text-[10px] text-neutral-400">3 Bundles</div>
                   </div>
                 </div>
               </div>
 
-              {/* Delegation Preview Banner */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-emerald-950/40 to-neutral-900/80 border border-emerald-800/30 mb-8 flex items-center gap-3">
+              {/* Bundle Preview Banner */}
+              <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-emerald-950/30 to-neutral-900/80 border border-emerald-800/30 mb-8 flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 shrink-0">
-                  <FaMapMarkerAlt />
+                  <FaBolt />
                 </div>
                 <div className="text-xs sm:text-sm text-neutral-300">
-                  <span className="font-semibold text-white">Delegation Preview:</span> Canton Fair Phase 3 Business Delegation • <span className="text-emerald-400 font-medium">31 October–4 November 2026 | China</span>
+                  <span className="font-semibold text-white">Sale Bundles:</span> Starter (55% off) • Growth (65% off) • Enterprise (70% off) •{" "}
+                  <span className="text-emerald-400 font-medium">Dedicated export coordinator included</span>
                 </div>
               </div>
 
@@ -138,7 +140,7 @@ export default function EventPage() {
                   href="/events/ai-driven-export-strategies"
                   className="group px-6 py-3.5 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-black font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-emerald-500/25 transition-all text-sm"
                 >
-                  <span>View Details</span>
+                  <span>View Sale Details</span>
                   <FaChevronRight className="text-xs transition-transform group-hover:translate-x-1" />
                 </Link>
 
@@ -149,57 +151,50 @@ export default function EventPage() {
                   className="px-6 py-3.5 rounded-full bg-emerald-500 text-black font-semibold flex items-center justify-center gap-2 hover:bg-emerald-400 transition-all text-sm"
                 >
                   <FaWhatsapp className="text-base" />
-                  <span>Register on WhatsApp</span>
+                  <span>Claim on WhatsApp</span>
                 </a>
 
                 <a
-                  href="/Modern%20Online%20Webinar%20(2).pdf"
+                  href={brochureUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3.5 rounded-full border border-neutral-800 bg-neutral-900/50 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-500/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
+                >
+                  <FaDownload className="text-emerald-400 text-xs" />
+                  <span>Sale Brochure</span>
+                </a>
+
+                <a
+                  href={posterUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-5 py-3.5 rounded-full border border-neutral-800 bg-neutral-900/50 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
                 >
                   <FaDownload className="text-emerald-400 text-xs" />
-                  <span>Webinar Brochure</span>
-                </a>
-
-                <a
-                  href="/NIE%20tour%20brochures.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-3.5 rounded-full border border-neutral-800 bg-neutral-900/50 backdrop-blur-sm flex items-center justify-center gap-2 hover:border-emerald-800/50 transition-all text-xs sm:text-sm font-medium text-neutral-300 hover:text-white"
-                >
-                  <FaDownload className="text-emerald-400 text-xs" />
-                  <span>Tour Brochure</span>
+                  <span>View Poster</span>
                 </a>
               </div>
-
             </div>
 
-            {/* Right Thumbnail Column */}
+            {/* Right Poster Column */}
             <div className="lg:col-span-5">
-              <div className="relative group rounded-2xl overflow-hidden border border-emerald-800/30 shadow-2xl bg-neutral-900/60 backdrop-blur-md p-2">
-                <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden">
+              <div className="relative group rounded-2xl overflow-hidden border border-emerald-500/30 shadow-2xl bg-neutral-900/60 backdrop-blur-md p-2.5 max-w-sm mx-auto">
+                <a
+                  href={posterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block relative aspect-[5/7] w-full rounded-xl overflow-hidden"
+                >
                   <Image
-                    src="/canton-webinar-thumb.jpg"
-                    alt="Canton Fair 2026 Free Online Workshop"
+                    src="/brochure/Black Friday Poster@2x (2).png"
+                    alt="New India Export Black Friday Sale 70% OFF Poster"
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="object-contain object-left-top scale-[1.14] origin-top-left group-hover:scale-[1.17] transition-transform duration-700"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-bold text-emerald-400">Sunday, 6 September 2026</div>
-                      <div className="text-[11px] text-neutral-300">1:00 PM (IST) | Free Workshop</div>
-                    </div>
-                    <span className="px-2.5 py-1 rounded-full bg-emerald-500 text-black text-[10px] font-bold uppercase tracking-wider">
-                      Online
-                    </span>
-                  </div>
-                </div>
+                </a>
               </div>
             </div>
-
           </div>
         </motion.div>
       </section>

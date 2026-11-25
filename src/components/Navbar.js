@@ -62,8 +62,8 @@ export default function Navbar() {
 
   const brochures = [
     {
-      name: "Canton Fair Webinar Brochure",
-      path: "/Modern%20Online%20Webinar%20(2).pdf",
+      name: "Black Friday Sale Brochure",
+      path: "/brochure/new-india-export-black-friday.pdf",
       type: "download"
     },
     {
